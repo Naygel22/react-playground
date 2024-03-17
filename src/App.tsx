@@ -101,7 +101,7 @@ function App() {
       <Card {...singleData}/>
       {cards.map(el=><Card key={el.id} {...el} />)}
     </Wrapper>
-    <Button />
+    <Button {...cards}/>
     <Comments data={data}/>
     <Footer/>
     </div>
