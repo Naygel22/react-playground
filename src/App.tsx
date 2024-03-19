@@ -5,6 +5,7 @@ import { AsideMenu } from './components/AsideMenu';
 import { Footer } from './components/Footer';
 import { Button } from './components/Form';
 import { Comments } from './components/Comments';
+import { Parent } from './components/Parent';
 
 
 const singleData = {
@@ -18,7 +19,7 @@ const singleData = {
   phoneNumber: "+48 123 456 789",
 };
 
-const cards = [
+export const cards = [
   {
     id: 1,
     imgSrc:
@@ -97,11 +98,14 @@ function App() {
   return (
     <div>
     <AsideMenu />
-    <Wrapper>
-      <Card {...singleData}/>
-      {cards.map(el=><Card key={el.id} {...el} />)}
-    </Wrapper>
-    <Button {...cards}/>
+
+    <Parent>
+    </Parent>
+    {/* <Wrapper> */}
+      {/* <Card {...singleData}/> */}
+      {/* {cards.map(el=><Card key={el.id} {...el} />)} */}
+    {/* </Wrapper> */}
+    {/* <Button {...cards}/> */}
     <Comments data={data}/>
     <Footer/>
     </div>

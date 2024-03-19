@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import {Card} from "./First";
+import {cards} from '../App';
 
 // type Human={
 //     age:number;
@@ -43,16 +44,15 @@ import {Card} from "./First";
 
 
 
-export const Button: React.FC = ({cards}: any) => {
+export const Button = (props: {setFilter: any}) => {
   const [searchItem, setsearchItem] = useState("");
-  const [filteredItem, setfilteredItem] = useState(cards);
+  // const [filteredItem, setfilteredItem] = useState(cards);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log(searchItem);
 
-    const filteredCards = cards.filter((card: any) => card.name === searchItem);
-    setfilteredItem(filteredCards);
+    props.setFilter(searchItem);
   }
   
   return (
@@ -66,10 +66,6 @@ export const Button: React.FC = ({cards}: any) => {
       />
       <button type="submit">Submit</button>
     </form>
-      
-      <div>
-      {filteredItem && filteredItem.map((card, index: number) => (<Card key={index} {...cards}/>))}
-      </div>
     </>
     
       
