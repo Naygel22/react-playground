@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+const POSTS_PER_PAGE = 4;
+
+export interface Post {
+  userId: number
+  id: number
+  title: string
+  body: string
+}
+
 export function Posts() {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<Post[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const postsPerPage = 4;
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+    const totalPages = data ? Math.ceil(data.length / POSTS_PER_PAGE) : 0;
 
-    const startIndex = (currentPage - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
@@ -26,7 +35,6 @@ export function Posts() {
     };
 
     const handleNextPage = () => {
-        const totalPages = Math.ceil(data.length / postsPerPage);
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }

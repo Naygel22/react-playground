@@ -42,17 +42,17 @@ import {cards} from '../App';
 // };
 
 
+type SearchFormProps={
+  onSearch: (searchItem:string)=>void
+}
 
-
-export const Button = (props: {setFilter: any}) => {
+export const SearchForm = ({onSearch}:SearchFormProps) => {
   const [searchItem, setsearchItem] = useState("");
   // const [filteredItem, setfilteredItem] = useState(cards);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log(searchItem);
-
-    props.setFilter(searchItem);
+    onSearch(searchItem);
   }
   
   return (

@@ -1,30 +1,26 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {cards} from '../App'
-import {Button} from './Form';
+import {Button, SearchForm} from './Form';
 import {Card} from './First';
 
-export const Parent = (props: any) => {
+export const Parent = () => {
 
-// const dupa = cards.filter();
 
-// return (
-//   <>
-//   {dupa.map(() => <Card .../>)}
-//   </>
-// )
+  const [filteredCards,setFilteredCards]=useState(cards)
 
-  const [filter, setFilter] = React.useState<string>('');
+  const onSearch = (searchItem:string) => {
+    const filteredCards=cards.filter(card => card.name.toLowerCase().includes(searchItem.toLowerCase()))
+    console.log("filteredCards",filteredCards)
+    setFilteredCards(filteredCards)
+  }
 
   return (
     <>
+        <SearchForm onSearch={onSearch}/>
       {
-      // TODO
-      /**
-       * <Cards filter={filter} />
-       */
-      cards.filter(card => card.name.includes(filter)).map(el=><Card key={el.id} {...el} />)
+      
+      filteredCards.map(el=><Card key={el.id} {...el} />)
       }
-      <Button setFilter={setFilter}/>
     </>
   )
 }

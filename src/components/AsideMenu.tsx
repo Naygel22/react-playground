@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BsFillPeopleFill, BsFillBagCheckFill,BsFillFileEarmarkRuledFill, BsFillHddRackFill } from "react-icons/bs";
 
 
@@ -25,6 +26,12 @@ const menuData = [
   ];
 
   export function AsideMenu() {
+    const [isOpen,setIsOpen]=useState(false)
+
+    function showOrHide() {
+      setIsOpen(prev=>!prev)
+    }
+
     return (
       <div className="menu">
         <div className="logo">Logo</div>
@@ -37,6 +44,8 @@ const menuData = [
               </div>
             );
           })}
+        <button onClick={showOrHide} style={{zIndex:1 }}>{isOpen ? "Show" : "Hide"}</button>
+
         </div>
       </div>
     );
