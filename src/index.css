@@ -58,6 +58,16 @@
 .menuIcon{
   margin-right: 10px;
 }
+.post{
+  border: 1px solid black;
+  margin-top: 30px;
+  padding: 10px;
+  text-align: left;
+}
+.postTitle{
+  font-size: 18px;
+  margin-bottom: 5px;
+}
 
 @media all and (max-width: 1050px) {
   .wrapper {

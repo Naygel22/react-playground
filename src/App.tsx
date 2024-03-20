@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { Button } from './components/Form';
 import { Comments } from './components/Comments';
 import { Parent } from './components/Parent';
+import { Posts } from './components/Posts';
 
 
 const singleData = {
@@ -108,6 +109,7 @@ function App() {
     {/* <Button {...cards}/> */}
     <Comments data={data}/>
     <Footer/>
+    <Posts />
     </div>
   )
 }
