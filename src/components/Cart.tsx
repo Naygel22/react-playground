@@ -33,41 +33,57 @@ function reducer(state: Cart[], action:Readonly<ActionType>):typeof initialState
     const isInCart=state.find(product=>product.id===action.payload.id)
     //jak jest to ten sam produkt +1
     if(isInCart){
-        const newProducts= state.map(product=>{
-            if(product.id===action.payload.id){
-                return {...product,quantity:product.quantity+1}
-            }else{
-                return product
-            }
-        })
+        const newProducts= state.map(product =>
+                    product.id === action.payload.id
+                        ? { ...product, quantity: product.quantity + 1}
+                        : product
+                );
         return newProducts
         //jak nie ma to dodac do tablicy
     }else{
         const newProduct=products.find(product=>product.id===action.payload.id)
         if(newProduct){
             return [...state, {...newProduct, quantity: 1}]
-        }else{
-            return state
         }
     }
     return state;
    case "decrement":
      //czy jest w koszyku
-
+     const productToDecrement = state.find(product => product.id === action.payload.id);
     //jak jest to ten sam produkt -1 i sprawdzić czy nie jest 0, bo jak jest to trzeba go usunąć z koszyka
-
+    if(productToDecrement && productToDecrement.quantity > 1){
+        const newProducts = state.map(product =>
+            product.id === action.payload.id
+                ? { ...product, quantity: product.quantity - 1 }
+                : product
+        );
+        return newProducts
+        //jak nie ma to dodac do tablicy
+    }else {
+        return state.filter(product => product.id !== action.payload.id);
+    }
     //jak nie ma to nic nie robisz
+ 
+    case "change":
+    const productsToChange = state.find(product => product.id === action.payload.id);
+    if (productsToChange) {
+        return state.map(product =>
+            product.id === action.payload.id
+                ? { ...product, quantity: action.payload.newQuantity }
+                : product
+        );
+    }
+    // Jeśli produkt znajduje się już w koszyku, aktualizujemy jego ilość na nową wartość (action.payload.newQuantity).
+    // W przeciwnym razie, nic nie robimy, zwracamy stan koszyka bez zmian.
     return state;
-   case "change":
-     //czy jest w koszyku
-    //jak jest to podmienić
-    //jak nie ma to nic nie robimy
-    return state;
+
+    
    case "clear":
     return [];
    default:
     throw new Error("Bad action type")
   }
+
 }
 
 const products:Product[]=[
@@ -79,7 +95,7 @@ const products:Product[]=[
     {
         name: "Marchew",
         price: 10,
-        id: 1,
+        id: 2,
     }
 ]
 
@@ -96,7 +112,7 @@ export const Cart = () => {
         {state.map(product=><div> <button onClick={()=>dispatch({type: "decrement",payload: {id: product.id}})}>Decrement</button>{product.name}<button onClick={()=>dispatch({type: "increment",payload: {id: product.id}})}>Increment</button></div>)}
         
    
-    {/* <button onClick={()=>dispatch({type: "change",payload: {id: 1, newQuantity: 10}})}>Change</button> */}
+     <button onClick={()=>dispatch({type: "change",payload: {id: 1, newQuantity: 10}})}>Change</button> 
      <button onClick={()=>dispatch({type: "clear"})}>Clear</button>
     </div>
   )

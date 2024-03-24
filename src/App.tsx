@@ -7,6 +7,8 @@ import { Button } from './components/Form';
 import { Comments } from './components/Comments';
 import { Parent } from './components/Parent';
 import { Posts } from './components/Posts';
+import { Cart } from './components/Cart';
+import { KidsForm } from './components/KidsForm';
 
 
 const singleData = {
@@ -110,6 +112,8 @@ function App() {
     <Comments data={data}/>
     <Footer/>
     <Posts />
+    <Cart />
+    <KidsForm />
     </div>
   )
 }

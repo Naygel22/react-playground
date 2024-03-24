@@ -36,14 +36,18 @@ const menuData = [
       <div className="menu">
         <div className="logo">Logo</div>
         <div>
-          {menuData.map(item => {
-            return (
-              <div key={item.linkName}  className="menuBar">
-                <div className="menuIcon">{item.icon}</div>
-                <a href={item.link}>{item.linkName}</a>
-              </div>
-            );
-          })}
+        {!isOpen && (
+          <div>
+            {menuData.map(item => {
+              return (
+                <div key={item.linkName} className="menuBar">
+                  <div className="menuIcon">{item.icon}</div>
+                  <a href={item.link}>{item.linkName}</a>
+                </div>
+              );
+            })}
+          </div>
+        )}
         <button onClick={showOrHide} style={{zIndex:1 }}>{isOpen ? "Show" : "Hide"}</button>
 
         </div>
