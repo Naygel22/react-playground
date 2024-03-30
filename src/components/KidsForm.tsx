@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef,ElementRef } from 'react';
 
 type Passenger = {
   name: string,
@@ -15,8 +15,8 @@ const initialPassengers: Passenger[] = [
 
 export function KidsForm() {
   const [passengers, setPassengers] = useState<Passenger[]>(initialPassengers);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<ElementRef<"input">>(null);
+  const ageRef = useRef<ElementRef<"input">>(null);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -29,7 +29,7 @@ export function KidsForm() {
     const age = ageInput.value;
 
     if(name && age) {
-      setPassengers([...passengers, {name, age}]);
+      setPassengers(prev=>[...prev, {name, age}]);
       nameInput.value = ''; 
       ageInput.value = '';
 

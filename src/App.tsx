@@ -9,6 +9,7 @@ import { Parent } from './components/Parent';
 import { Posts } from './components/Posts';
 import { Cart } from './components/Cart';
 import { KidsForm } from './components/KidsForm';
+import { ClickBox } from './components/ClickBox';
 
 
 const singleData = {
@@ -114,6 +115,7 @@ function App() {
     <Posts />
     <Cart />
     <KidsForm />
+    <ClickBox onClickOutside={()=>console.log('Clicked outside')}/>
     </div>
   )
 }

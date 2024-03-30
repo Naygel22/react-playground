@@ -65,8 +65,8 @@ function reducer(state: Cart[], action:Readonly<ActionType>):typeof initialState
     //jak nie ma to nic nie robisz
  
     case "change":
-    const productsToChange = state.find(product => product.id === action.payload.id);
-    if (productsToChange) {
+    const productToChange = state.find(product => product.id === action.payload.id);
+    if (productToChange) {
         return state.map(product =>
             product.id === action.payload.id
                 ? { ...product, quantity: action.payload.newQuantity }

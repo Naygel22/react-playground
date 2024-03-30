@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState} from 'react';
+import { useAPI } from "../hooks/useAPI";
 
 const POSTS_PER_PAGE = 4;
 
@@ -10,23 +11,18 @@ export interface Post {
 }
 
 export function Posts() {
-    const [data, setData] = useState<Post[]>([]);
+    const {data, isLoading, isError} = useAPI<Post[]>("https://jsonplaceholder.typicode.com/posts");
     const [currentPage, setCurrentPage] = useState(1);
-
+    
+    if(isLoading){
+        return <p>Loading...</p>
+    }
+    if(!data){
+        return <p>No posts</p>
+    }
     const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
     const endIndex = startIndex + POSTS_PER_PAGE;
     const totalPages = data ? Math.ceil(data.length / POSTS_PER_PAGE) : 0;
-
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                setData(json);
-            })
-            .catch((error) => console.error(error));
-    }, []);
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
@@ -43,16 +39,14 @@ export function Posts() {
     return (
         <>
             <div>
-                {data !== null ? (
+                {
                     data.slice(startIndex, endIndex).map((el) => (
                         <div className='post' key={el.id}>
                             <h2 className='postTitle'>{el.title}</h2>
                             <p>{el.body}</p>
                         </div>
                     ))
-                ) : (
-                    <p>Loading...</p>
-                )}
+                }
             </div>
 
             <button onClick={handlePreviousPage}>Previous</button>
