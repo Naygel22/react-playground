@@ -1,5 +1,5 @@
 import './App.css'
-import {Card} from "./components/First"
+import { Card } from "./components/First"
 import { Wrapper } from './components/Wrapper'
 import { AsideMenu } from './components/AsideMenu';
 import { Footer } from './components/Footer';
@@ -10,7 +10,9 @@ import { Posts } from './components/Posts';
 import { Cart } from './components/Cart';
 import { KidsForm } from './components/KidsForm';
 import { ClickBox } from './components/ClickBox';
-
+import { Navigation } from './components/Navigation';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ClientForm from './components/ClientForm';
 
 const singleData = {
   imgSrc: "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
@@ -78,7 +80,7 @@ const data = [
           {
             comment: "electricityBills",
             username: "test2",
-            subComments: [{ comment: "invoice1",username: "test1" }, { comment: "invoice2",username: "test3" }],
+            subComments: [{ comment: "invoice1", username: "test1" }, { comment: "invoice2", username: "test3" }],
           },
         ],
       },
@@ -101,21 +103,38 @@ function App() {
 
   return (
     <div>
-    <AsideMenu />
+      <AsideMenu />
 
-    <Parent>
-    </Parent>
-    {/* <Wrapper> */}
+      <Parent>
+      </Parent>
+      {/* <Wrapper> */}
       {/* <Card {...singleData}/> */}
       {/* {cards.map(el=><Card key={el.id} {...el} />)} */}
-    {/* </Wrapper> */}
-    {/* <Button {...cards}/> */}
-    <Comments data={data}/>
-    <Footer/>
-    <Posts />
-    <Cart />
-    <KidsForm />
-    <ClickBox onClickOutside={()=>console.log('Clicked outside')}/>
+      {/* </Wrapper> */}
+      {/* <Button {...cards}/> */}
+      <Comments data={data} />
+      <Footer />
+      <Posts />
+      <Cart />
+      <KidsForm />
+      <ClickBox onClickOutside={() => console.log('Clicked outside')} />
+
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route element={<div>Page 1</div>} path="" />
+          <Route path="/clients">
+            <Route index element={<div>Business</div>} />
+            <Route element={<div>Business/clients</div>} path="clients" />
+            <Route path="orders">
+              <Route index element={<div>Business/orders</div>} />
+              <Route path=":orderId" element={<div>Business/order/id</div>} />
+            </Route>
+          </Route>
+          <Route element={<div>404</div>} path="*" />
+        </Routes>
+      </BrowserRouter>
+      <ClientForm />
     </div>
   )
 }
