@@ -16,3 +16,31 @@ export const clientSchema = yup.object({
 });
 
 export type ClientFormValues = yup.InferType<typeof clientSchema>;
+
+
+export const yupRegisterSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  username: yup.string().min(3, "Username must be at least 3 characters").required("Username is required"),
+  email: yup.string().email("Invalid email format").required("Email is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9a-zA-Z])$/,
+      "Password must contain at least one uppercase letter, one special character, and one digit"
+    ),
+  repeatPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Repeat password is required"),
+});
+
+export type RegisterFormValues = yup.InferType<typeof yupRegisterSchema>;
+
+
+export const yupLoginSchema = yup.object({
+  username: yupRegisterSchema.username
+})
+
+export type LoginFormValues = yup.InferType<typeof yupLoginSchema>;

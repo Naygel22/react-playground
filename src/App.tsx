@@ -13,6 +13,7 @@ import { ClickBox } from './components/ClickBox';
 import { Navigation } from './components/Navigation';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ClientForm from './components/ClientForm';
+import { ClientFormValues } from './validators/validators';
 
 const singleData = {
   imgSrc: "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
@@ -99,6 +100,17 @@ const data = [
   },
 ];
 
+const initialFormValues: ClientFormValues = {
+  name: "",
+  surname: "",
+  street: "",
+  postCode: "",
+  city: "",
+  region: "",
+  photoUrl: "",
+  phoneNumber: "",
+};
+
 function App() {
 
   return (
@@ -134,7 +146,9 @@ function App() {
           <Route element={<div>404</div>} path="*" />
         </Routes>
       </BrowserRouter>
-      <ClientForm />
+      <ClientForm initialFormValues={initialFormValues} onFormSubmit={(values) => {
+        console.log("Form submitted with values:", values)
+      }} />
     </div>
   )
 }
