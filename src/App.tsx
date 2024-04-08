@@ -14,6 +14,9 @@ import { Navigation } from './components/Navigation';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ClientForm from './components/ClientForm';
 import { ClientFormValues } from './validators/validators';
+import { FakeRegisterComponent } from './components/forms/FakeRegisterComponent';
+import { FakeLoginComponent } from './components/forms/FakeLoginComponent';
+import { Browse } from './components/Browse';
 
 const singleData = {
   imgSrc: "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
@@ -111,6 +114,19 @@ const initialFormValues: ClientFormValues = {
   phoneNumber: "",
 };
 
+const initialRegisterFormValues = {
+  name: '',
+  username: '',
+  email: '',
+  password: '',
+  repeatPassword: ''
+}
+
+const initialLoginFormValues = {
+  username: '',
+  password: ''
+}
+
 function App() {
 
   return (
@@ -131,24 +147,24 @@ function App() {
       <KidsForm />
       <ClickBox onClickOutside={() => console.log('Clicked outside')} />
 
-      <BrowserRouter>
-        <Navigation />
-        <Routes>
-          <Route element={<div>Page 1</div>} path="" />
-          <Route path="/clients">
-            <Route index element={<div>Business</div>} />
-            <Route element={<div>Business/clients</div>} path="clients" />
-            <Route path="orders">
-              <Route index element={<div>Business/orders</div>} />
-              <Route path=":orderId" element={<div>Business/order/id</div>} />
-            </Route>
-          </Route>
-          <Route element={<div>404</div>} path="*" />
-        </Routes>
-      </BrowserRouter>
       <ClientForm initialFormValues={initialFormValues} onFormSubmit={(values) => {
         console.log("Form submitted with values:", values)
       }} />
+
+      <FakeRegisterComponent
+        initialRegisterFormValues={initialRegisterFormValues}
+        onFormSubmit={(values) => {
+          console.log('Registration submitted with values:', values)
+        }}
+      />
+      <FakeLoginComponent
+        initialLoginFormValues={initialLoginFormValues}
+        onFormSubmit={(values) => {
+          console.log('Login submitted with values:', values)
+        }}
+      />
+
+      <Browse />
     </div>
   )
 }

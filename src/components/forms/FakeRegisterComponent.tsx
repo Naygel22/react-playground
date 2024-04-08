@@ -1,52 +1,27 @@
-import { useFormik } from "formik";
-import { RegisterFormValues, yupRegisterSchema } from "../../validators/validators";
+import { useFormik } from 'formik'
+import { TextInput } from './TextInput'
+import { RegisterFormValues, yupRegisterSchema } from '../../validators/validators'
 
-type FormValues = {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
+type RegisterFormProps = {
+  initialRegisterFormValues: RegisterFormValues
+  onFormSubmit: (values: RegisterFormValues) => void;
 }
 
-export const FakeRegisterComponent = () => {
-  const formik = useFormik<FormValues>({
-    initialValues: {
-      name: "",
-      username: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
-    },
-    onSubmit: (values: FormValues) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-    validationSchema: yupRegisterSchema,
-  });
+export const FakeRegisterComponent = ({ initialRegisterFormValues, onFormSubmit }: RegisterFormProps) => {
+  const formik = useFormik<RegisterFormValues>({
+    initialValues: initialRegisterFormValues,
+    onSubmit: onFormSubmit,
+    validationSchema: yupRegisterSchema
+  })
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </div>
+      <TextInput formik={formik} accessor='name' label='Name' />
+      <TextInput formik={formik} accessor='username' label='Username' />
+      <TextInput formik={formik} accessor='email' label='Email' />
+      <TextInput formik={formik} accessor='password' label='Password' />
+      <TextInput formik={formik} accessor='repeatPassword' label='Confirm password' />
       <button type="submit">Send</button>
     </form>
-  );
+  )
 }
