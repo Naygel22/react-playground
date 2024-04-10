@@ -1,27 +1,37 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Navigation } from './Navigation'
+import { Route, Routes } from 'react-router-dom'
+import { Clients } from '../pages/clients/Clients'
+import { AddClient } from '../pages/clients/add/AddClient'
+import { EditClient } from '../pages/clients/id/edit/EditClient'
+import { LoginPage } from '../pages/login/LoginPage'
+import { RegisterPage } from '../pages/register/RegisterPage'
+import { ClientId } from '../pages/clients/id/ClientId'
 import { AsideMenu } from './AsideMenu'
+import { AddOrderPage } from '../pages/orders/add/AddOrderPage'
+
 export function Browse() {
   return (
-    <BrowserRouter>
-      <Navigation />
+    <>
+      <AsideMenu />
       <Routes>
+        <Route path="/" element={<div>Home</div>} />
         <Route path="/clients">
-          <Route index element={<div>Clients</div>} />
-          <Route path="add" element={<AsideMenu />} />
-          <Route path=":id" element={<div>Id</div>} />
-          <Route path=":id/edit" element={<div>Edit</div>} />
+          <Route index element={<Clients />} />
+          <Route path="add" element={<AddClient />} />
+          <Route path=":id" element={<ClientId />} />
+          <Route path=":id/edit" element={<EditClient />} />
         </Route>
 
         <Route path="/orders">
           <Route index element={<div>Orders</div>} />
           <Route path=":id" element={<div>Id</div>} />
-          <Route path="add" element={<div>Add</div>} />
+          <Route path="add" element={<AddOrderPage />} />
         </Route>
 
         <Route path="/invoices" element={<div>Invoices</div>} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route element={<div>404</div>} path="*" />
       </Routes>
-    </BrowserRouter>
+    </>
   )
 }

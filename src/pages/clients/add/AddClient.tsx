@@ -1,6 +1,6 @@
-import React from 'react'
-import { ClientFormValues } from '../validators/validators';
-import ClientForm from '../components/ClientForm';
+
+import ClientForm from '../../../components/ClientForm';
+import { ClientFormValues } from '../../../validators/validators';
 
 const addClientInital = {
   name: "",

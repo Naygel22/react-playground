@@ -5,7 +5,6 @@ import { AsideMenu } from './components/AsideMenu';
 import { Footer } from './components/Footer';
 import { Button } from './components/Form';
 import { Comments } from './components/Comments';
-import { Parent } from './components/Parent';
 import { Posts } from './components/Posts';
 import { Cart } from './components/Cart';
 import { KidsForm } from './components/KidsForm';
@@ -28,45 +27,6 @@ const singleData = {
   subRegion: "Region",
   phoneNumber: "+48 123 456 789",
 };
-
-export const cards = [
-  {
-    id: 1,
-    imgSrc:
-      "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-    name: "Zbigniew",
-    surname: "Herbert",
-    street: "TestStreet",
-    postCode: "00-123",
-    town: "Town",
-    subRegion: "Region",
-    phoneNumber: "+48 123 456 789",
-  },
-  {
-    id: 2,
-    imgSrc:
-      "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-    name: "Henryk",
-    surname: "Sienkiewicz",
-    street: "TestStreet",
-    postCode: "00-123",
-    town: "Town",
-    subRegion: "Region",
-    phoneNumber: "+48 123 456 788",
-  },
-  {
-    id: 3,
-    imgSrc:
-      "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-    name: "Wisława",
-    surname: "Szymborska",
-    street: "TestStreet",
-    postCode: "00-123",
-    town: "Town",
-    subRegion: "Region",
-    phoneNumber: "+48 123 456 787",
-  },
-];
 
 const data = [
   {
@@ -114,55 +74,22 @@ const initialFormValues: ClientFormValues = {
   phoneNumber: "",
 };
 
-const initialRegisterFormValues = {
-  name: '',
-  username: '',
-  email: '',
-  password: '',
-  repeatPassword: ''
-}
-
-const initialLoginFormValues = {
-  username: '',
-  password: ''
-}
-
 function App() {
 
   return (
     <div>
-      <AsideMenu />
-
-      <Parent>
-      </Parent>
+      {/* <AsideMenu /> */}
       {/* <Wrapper> */}
       {/* <Card {...singleData}/> */}
       {/* {cards.map(el=><Card key={el.id} {...el} />)} */}
       {/* </Wrapper> */}
       {/* <Button {...cards}/> */}
-      <Comments data={data} />
+      {/* <Comments data={data} />
       <Footer />
       <Posts />
       <Cart />
       <KidsForm />
-      <ClickBox onClickOutside={() => console.log('Clicked outside')} />
-
-      <ClientForm initialFormValues={initialFormValues} onFormSubmit={(values) => {
-        console.log("Form submitted with values:", values)
-      }} />
-
-      <FakeRegisterComponent
-        initialRegisterFormValues={initialRegisterFormValues}
-        onFormSubmit={(values) => {
-          console.log('Registration submitted with values:', values)
-        }}
-      />
-      <FakeLoginComponent
-        initialLoginFormValues={initialLoginFormValues}
-        onFormSubmit={(values) => {
-          console.log('Login submitted with values:', values)
-        }}
-      />
+      <ClickBox onClickOutside={() => console.log('Clicked outside')} /> */}
 
       <Browse />
     </div>

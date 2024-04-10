@@ -65,7 +65,17 @@ export type RegisterFormValues = yup.InferType<typeof yupRegisterSchema>
 
 export const yupLoginSchema = yup.object({
   username: BASE_VALIDATORS.usernameValidator,
-  password: BASE_VALIDATORS.passwordValidator
+  password: yup.string().required()
 })
 
 export type LoginFormValues = yup.InferType<typeof yupLoginSchema>
+
+
+export const OrderSchema = yup.object({
+  name: yup.string().required('Name is required'),
+  quantity: yup.number().min(2, 'Quantity must be greater than 1').max(14, 'Quantity must be less than 15').required('Quantity is required'),
+  title: yup.string().min(5, 'Title must be at least 5 characters long').required('Title of an order is required'),
+  orderContent: yup.string().min(10, 'Content of an order must be at least 10 characters long').required('Title of an order is required')
+})
+
+export type OrderFormValues = yup.InferType<typeof OrderSchema>

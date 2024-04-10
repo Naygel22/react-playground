@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { ClientFormValues } from '../validators/validators';
-import ClientForm from '../components/ClientForm';
+import { ClientFormValues } from '../../../../validators/validators';
+import ClientForm from '../../../../components/ClientForm';
+import { Link, useParams } from 'react-router-dom';
 
 export const EditClient = () => {
 
+  const params = useParams()
   const [initialValues, setInitialValues] = useState<ClientFormValues | null>(null)
 
   useEffect(() => {
@@ -26,6 +28,7 @@ export const EditClient = () => {
   return (
     <div>Edit client
       {initialValues ? <ClientForm initialFormValues={initialValues} onFormSubmit={onEditClient} /> : null}
+      <Link to={`/clients/${params.id}`}>Cancel</Link>
     </div>
   )
 }
