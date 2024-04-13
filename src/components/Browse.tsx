@@ -7,6 +7,7 @@ import { RegisterPage } from '../pages/register/RegisterPage'
 import { ClientId } from '../pages/clients/id/ClientId'
 import { AsideMenu } from './AsideMenu'
 import { AddOrderPage } from '../pages/orders/add/AddOrderPage'
+import { Orders } from './Orders'
 
 export function Browse() {
   return (
@@ -22,7 +23,7 @@ export function Browse() {
         </Route>
 
         <Route path="/orders">
-          <Route index element={<div>Orders</div>} />
+          <Route index element={<Orders />} />
           <Route path=":id" element={<div>Id</div>} />
           <Route path="add" element={<AddOrderPage />} />
         </Route>

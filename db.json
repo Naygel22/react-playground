@@ -1,7 +1,7 @@
 {
   "clients": [
     {
-      "id": 1,
+      "id": "1",
       "imgSrc": "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
       "name": "Zbigniew",
       "surname": "Herbert",
@@ -10,6 +10,44 @@
       "town": "Town",
       "subRegion": "Region",
       "phoneNumber": "+48 123 456 789"
+    }
+  ],
+  "orders": [
+    {
+      "id": "acc1",
+      "formValues": {
+        "name": "",
+        "quantity": 0,
+        "title": "",
+        "orderContent": ""
+      }
+    },
+    {
+      "id": "cb70",
+      "formValues": {
+        "name": "987 654 321",
+        "quantity": "12",
+        "title": "title",
+        "orderContent": "content of an order"
+      }
+    },
+    {
+      "id": "7301",
+      "formValues": {
+        "name": "123 456 789",
+        "quantity": "13",
+        "title": "title2",
+        "orderContent": "content of an order2"
+      }
+    },
+    {
+      "id": "62fd",
+      "formValues": {
+        "name": "",
+        "quantity": 0,
+        "title": "",
+        "orderContent": ""
+      }
     }
   ]
 }

@@ -20,6 +20,11 @@ const menuData = [
     icon: <BsFillBagCheckFill />,
   },
   {
+    linkName: "Orders add",
+    link: "/orders/add",
+    icon: <BsFillBagCheckFill />,
+  },
+  {
     linkName: "Invoices",
     link: "/invoices",
     icon: <BsFillFileEarmarkRuledFill />,
