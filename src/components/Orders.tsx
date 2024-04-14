@@ -20,6 +20,7 @@ export const Orders = () => {
           <p>Quantity: {order.formValues.quantity}</p>
           <p>Title: {order.formValues.title}</p>
           <p>Content: {order.formValues.orderContent}</p>
+          <button>Details</button>
         </div>
       ))
 
