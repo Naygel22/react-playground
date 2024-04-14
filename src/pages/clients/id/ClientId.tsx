@@ -16,8 +16,7 @@ export const ClientId = () => {
   }, [params.id]);
 
   const handleDelete = () => {
-    deleteClientById(params.id).then((data) => {
-      setClient(data);
+    deleteClientById(params.id).then(() => {
       navigate("/clients")
     });
   }
