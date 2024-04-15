@@ -16,6 +16,7 @@ export const SelectInput = <FormValues,>({ formik, accessor, label, options }: {
     <FormControl fullWidth>
       <InputLabel id={label}>{label}</InputLabel>
       <Select
+
         labelId={label}
         id={accessor}
         value={formik.values[accessor]}
@@ -24,8 +25,8 @@ export const SelectInput = <FormValues,>({ formik, accessor, label, options }: {
           formik.setFieldValue(accessor, e.target.value)
         }}
       >
-        {options.map(option => (
-          <MenuItem value={option.value}>{option.label}</MenuItem>
+        {options.map((option, id) => (
+          <MenuItem key={id} value={option.value}>{option.label}</MenuItem>
         ))}
 
       </Select>

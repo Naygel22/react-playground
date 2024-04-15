@@ -21,6 +21,7 @@ export const AddClient = () => {
   return (
     <div>AddClient
       <ClientForm initialFormValues={addClientInital} onFormSubmit={onAddClient} />
+      <button type="submit">Add</button>
     </div>
   )
 }

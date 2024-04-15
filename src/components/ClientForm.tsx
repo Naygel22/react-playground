@@ -24,7 +24,7 @@ function ClientForm({ initialFormValues, onFormSubmit }: ClientFormProps) {
       <TextInput formik={formik} accessor='region' label="Region" />
       <TextInput formik={formik} accessor='photoUrl' label="PhotoUrl" />
       <TextInput formik={formik} accessor='phoneNumber' label="PhoneNumber" />
-      <button type="submit">Send</button>
+
     </form>
   )
 }
