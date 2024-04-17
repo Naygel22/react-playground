@@ -11,8 +11,7 @@ type Option = {
   label: string;
 };
 
-export const AddOrder = ({ initialValues, onSubmit }) => {
-  const [formValues, setFormValues] = useState<OrderFormValues>(initialValues);
+export const AddOrder = () => {
   const [clients, setClients] = useState<Option[]>([]);
 
   useEffect(() => {
@@ -32,16 +31,15 @@ export const AddOrder = ({ initialValues, onSubmit }) => {
     fetchClients();
   }, []);
 
-  const handleAdd = () => {
-    sendOrderValues({ formValues }).then((data) => {
-      console.log('Success', data);
-    });
-  };
-
   const formik = useFormik<OrderFormValues>({
-    initialValues,
+    initialValues: {
+      name: "",
+      quantity: 0,
+      title: "",
+      orderContent: ""
+    },
     onSubmit: (values) => {
-      setFormValues(values);
+      sendOrderValues(values)
     },
     validationSchema: OrderSchema,
   });
@@ -52,7 +50,7 @@ export const AddOrder = ({ initialValues, onSubmit }) => {
       <TextInput formik={formik} accessor="quantity" label="Quantity" />
       <TextInput formik={formik} accessor="title" label="Title" />
       <TextInput formik={formik} accessor="orderContent" label="Content" />
-      <button type="submit" onClick={handleAdd}>Send</button>
+      <button type="submit">Send</button>
     </form>
   );
 };

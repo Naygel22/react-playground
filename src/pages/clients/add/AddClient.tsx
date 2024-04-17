@@ -21,6 +21,7 @@ export const AddClient = () => {
 
   const onAddClient = (values: ClientFormValues) => {
     setClientFormValues(values);
+    console.log(values)
   }
 
   const handleAdd = () => {

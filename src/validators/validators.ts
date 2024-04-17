@@ -33,12 +33,12 @@ export const clientSchema = yup.object({
     .min(5, 'Street must be at least 5 characters')
     .required('Street is required'),
   postCode: BASE_VALIDATORS.postCodeValidator,
-  city: yup
+  town: yup
     .string()
     .min(3, 'City must be at least 3 characters')
     .required('City is required'),
-  region: yup.string().min(3, 'Region must be at least 3 characters'),
-  photoUrl: yup.string().url(),
+  subRegion: yup.string().min(3, 'Region must be at least 3 characters'),
+  imgSrc: yup.string().url(),
   phoneNumber: yup
     .string()
     .matches(/^\+\d{11}$/, "Phone number must start with '+'")

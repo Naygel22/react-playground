@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getAllOrders } from "../api/getAllOrders"
+import { Order, getAllOrders } from "../api/getAllOrders"
 
 export const Orders = () => {
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
     getAllOrders().then((data) => {
@@ -16,10 +16,10 @@ export const Orders = () => {
       {orders.map(order => (
         <div key={order.id}>
           <h2>Current Form Values</h2>
-          <p>Phone: {order.formValues.name}</p>
-          <p>Quantity: {order.formValues.quantity}</p>
-          <p>Title: {order.formValues.title}</p>
-          <p>Content: {order.formValues.orderContent}</p>
+          <p>Phone: {order.name}</p>
+          <p>Quantity: {order.quantity}</p>
+          <p>Title: {order.title}</p>
+          <p>Content: {order.orderContent}</p>
           <button>Details</button>
         </div>
       ))

@@ -2,27 +2,33 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getClientById } from '../../../api/getClientByID';
 import { deleteClientById } from '../../../api/deleteClientById';
+import { Client } from '../../../api/getAllClients';
 
 
 export const ClientId = () => {
-  const [client, setClient] = useState([]);
-  const params = useParams()
+  const [client, setClient] = useState<Client | undefined>(undefined);
+  const params = useParams<{ id: string }>()
   const navigate = useNavigate()
 
   useEffect(() => {
-    getClientById(params.id).then((data) => {
-      setClient(data);
-    });
+    if (params.id) {
+      getClientById(params.id).then((data) => {
+        setClient(data);
+      });
+    }
   }, [params.id]);
 
   const handleDelete = () => {
-    deleteClientById(params.id).then(() => {
-      navigate("/clients")
-    });
+    if (params.id) {
+      deleteClientById(params.id).then(() => {
+        navigate("/clients")
+      });
+    }
   }
 
-
-
+  if (!client) {
+    return <p>Not found</p>
+  }
 
   return (
     <div>ClientId: {params.id}

@@ -12,6 +12,7 @@ function ClientForm({ initialFormValues, onFormSubmit }: ClientFormProps) {
     initialValues: initialFormValues,
     onSubmit: onFormSubmit,
     validationSchema: clientSchema,
+    enableReinitialize: true
   });
 
   return (
@@ -20,11 +21,11 @@ function ClientForm({ initialFormValues, onFormSubmit }: ClientFormProps) {
       <TextInput formik={formik} accessor='surname' label="Surname" />
       <TextInput formik={formik} accessor='street' label="Street" />
       <TextInput formik={formik} accessor='postCode' label="Post code" />
-      <TextInput formik={formik} accessor='city' label="City" />
-      <TextInput formik={formik} accessor='region' label="Region" />
-      <TextInput formik={formik} accessor='photoUrl' label="PhotoUrl" />
+      <TextInput formik={formik} accessor='town' label="City" />
+      <TextInput formik={formik} accessor='subRegion' label="Region" />
+      <TextInput formik={formik} accessor='imgSrc' label="PhotoUrl" />
       <TextInput formik={formik} accessor='phoneNumber' label="PhoneNumber" />
-
+      {initialFormValues ? <button type="submit">Update</button> : <button type="submit">Add</button>}
     </form>
   )
 }
