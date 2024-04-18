@@ -5,6 +5,7 @@ import { OrderFormValues, OrderSchema } from '../validators/validators';
 import { TextInput } from './forms/TextInput';
 import { sendOrderValues } from '../api/sendOrderValues';
 import { getAllClients } from '../api/getAllClients';
+import { useNavigate } from 'react-router-dom';
 
 type Option = {
   value: string;
@@ -13,6 +14,7 @@ type Option = {
 
 export const AddOrder = () => {
   const [clients, setClients] = useState<Option[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -40,6 +42,7 @@ export const AddOrder = () => {
     },
     onSubmit: (values) => {
       sendOrderValues(values)
+      navigate("/orders")
     },
     validationSchema: OrderSchema,
   });

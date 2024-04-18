@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Order, getAllOrders } from "../api/getAllOrders"
+import { Link } from "react-router-dom";
 
 export const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([])
@@ -20,7 +21,9 @@ export const Orders = () => {
           <p>Quantity: {order.quantity}</p>
           <p>Title: {order.title}</p>
           <p>Content: {order.orderContent}</p>
-          <button>Details</button>
+          <Link to={`/orders/${order.id}`}>
+            <button>Details</button>
+          </Link>
         </div>
       ))
 

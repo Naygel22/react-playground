@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getClientById } from '../../../api/getClientByID';
 import { deleteClientById } from '../../../api/deleteClientById';
-import { Client } from '../../../api/getAllClients';
+import { useQuery } from '@tanstack/react-query';
 
 
 export const ClientId = () => {
-  const [client, setClient] = useState<Client | undefined>(undefined);
   const params = useParams<{ id: string }>()
+  const { data, isLoading, error } = useQuery({ queryKey: ["clientId"], queryFn: () => getClientById(params.id) })
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (params.id) {
-      getClientById(params.id).then((data) => {
-        setClient(data);
-      });
-    }
-  }, [params.id]);
 
   const handleDelete = () => {
     if (params.id) {
@@ -25,23 +16,29 @@ export const ClientId = () => {
       });
     }
   }
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
 
-  if (!client) {
-    return <p>Not found</p>
+  if (!data) {
+    return <p>No data...</p>
+  }
+  if (error) {
+    return <p>Error</p>
   }
 
   return (
-    <div>ClientId: {params.id}
+    <div>
 
       <h2>Client Details</h2>
-      <p>Client ID: {client.id}</p>
-      <p>Name: {client.name}</p>
-      <p>Surname: {client.surname}</p>
-      <p>Street: {client.street}</p>
-      <p>Post Code: {client.postCode}</p>
-      <p>Town: {client.town}</p>
-      <p>Sub Region: {client.subRegion}</p>
-      <p>Phone Number: {client.phoneNumber}</p>
+      <p>Client ID: {data.id}</p>
+      <p>Name: {data.name}</p>
+      <p>Surname: {data.surname}</p>
+      <p>Street: {data.street}</p>
+      <p>Post Code: {data.postCode}</p>
+      <p>Town: {data.town}</p>
+      <p>Sub Region: {data.subRegion}</p>
+      <p>Phone Number: {data.phoneNumber}</p>
       <Link to={`/clients/${params.id}/edit`}>Edit</Link>
       <button onClick={handleDelete}>Delete</button>
     </div>

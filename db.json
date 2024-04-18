@@ -36,42 +36,6 @@
   ],
   "orders": [
     {
-      "id": "acc1",
-      "formValues": {
-        "name": "",
-        "quantity": 0,
-        "title": "",
-        "orderContent": ""
-      }
-    },
-    {
-      "id": "cb70",
-      "formValues": {
-        "name": "987 654 321",
-        "quantity": "12",
-        "title": "title",
-        "orderContent": "content of an order"
-      }
-    },
-    {
-      "id": "536e",
-      "formValues": {
-        "name": "",
-        "quantity": 0,
-        "title": "",
-        "orderContent": ""
-      }
-    },
-    {
-      "id": "703d",
-      "formValues": {
-        "name": "+48 123 456 787",
-        "quantity": "5",
-        "title": "Title",
-        "orderContent": "content of an order1"
-      }
-    },
-    {
       "id": "a5cb",
       "name": "+48 123 456 789",
       "quantity": "3",
@@ -79,11 +43,18 @@
       "orderContent": "content of an order"
     },
     {
-      "id": "e617",
+      "id": "faa9",
       "name": "+48 123 456 787",
       "quantity": "5",
-      "title": "Title",
-      "orderContent": "content of an order1"
+      "title": "Title2",
+      "orderContent": "content of an order"
+    },
+    {
+      "id": "7d84",
+      "name": "+48123456788",
+      "quantity": "2",
+      "title": "Title2",
+      "orderContent": "content of an order3"
     }
   ]
 }

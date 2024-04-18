@@ -23,7 +23,7 @@ export const Clients = () => {
     return <p>No data...</p>
   }
   if (error) {
-    return <p>Erro</p>
+    return <p>Error</p>
   }
 
   const onSearch = (searchItem: string) => {

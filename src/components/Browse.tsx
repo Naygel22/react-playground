@@ -8,6 +8,7 @@ import { ClientId } from '../pages/clients/id/ClientId'
 import { AsideMenu } from './AsideMenu'
 import { AddOrderPage } from '../pages/orders/add/AddOrderPage'
 import { Orders } from './Orders'
+import { OrderId } from '../pages/orders/id/OrderId'
 
 export function Browse() {
   return (
@@ -24,7 +25,7 @@ export function Browse() {
 
         <Route path="/orders">
           <Route index element={<Orders />} />
-          <Route path=":id" element={<div>Id</div>} />
+          <Route path=":id" element={<OrderId />} />
           <Route path="add" element={<AddOrderPage />} />
         </Route>
 
