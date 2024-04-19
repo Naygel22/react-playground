@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { SelectInput } from './forms/SelectInput';
 import { OrderFormValues, OrderSchema } from '../validators/validators';
@@ -6,6 +5,7 @@ import { TextInput } from './forms/TextInput';
 import { sendOrderValues } from '../api/sendOrderValues';
 import { getAllClients } from '../api/getAllClients';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 type Option = {
   value: string;
@@ -13,39 +13,38 @@ type Option = {
 };
 
 export const AddOrder = () => {
-  const [clients, setClients] = useState<Option[]>([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const clientsData = await getAllClients();
-        const clientsOptions = clientsData.map((client) => ({
-          value: client.phoneNumber,
-          label: `${client.name} ${client.surname}`
-        }));
-        setClients(clientsOptions);
-      } catch (error) {
-        console.error('Error fetching clients:', error);
-      }
-    };
+  const { data, isLoading, error } = useQuery({ queryKey: ["clients"], queryFn: getAllClients })
 
-    fetchClients();
-  }, []);
+  const clients: Option[] = data
+    ? data.map((client) => ({
+      value: client.phoneNumber,
+      label: `${client.name} ${client.surname}`
+    }))
+    : [];
 
   const formik = useFormik<OrderFormValues>({
     initialValues: {
-      name: "",
+      name: '',
       quantity: 0,
-      title: "",
-      orderContent: ""
+      title: '',
+      orderContent: ''
     },
     onSubmit: (values) => {
-      sendOrderValues(values)
-      navigate("/orders")
+      sendOrderValues(values);
+      navigate('/orders');
     },
-    validationSchema: OrderSchema,
+    validationSchema: OrderSchema
   });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error fetching clients: {error.message}</p>;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>

@@ -1,35 +1,35 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { getOrderById } from "../../../api/getOrderById";
 import { Order } from "../../../api/getAllOrders";
+import { useQuery } from "@tanstack/react-query";
 
 
 export const OrderId = () => {
-  const [order, setOrder] = useState<Order | undefined>(undefined)
   const params = useParams();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (params.id) {
-      getOrderById(params.id).then(data => {
-        setOrder(data);
-      })
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["orderId"],
+    queryFn: () => getOrderById(params.id)
+  })
 
-    }
-  }, [params.id])
-
-  if (!order) {
-    return <p>Not found</p>
+  if (!data) {
+    return <p>No data...</p>
+  }
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+  if (error) {
+    return <p>Error</p>
   }
 
   return (
     <div>
       <h2>Order Details</h2>
-      <p>Order ID: {order.id}</p>
-      <p>Phone: {order.name}</p>
-      <p>Quantity: {order.quantity}</p>
-      <p>Title: {order.title}</p>
-      <p>Content: {order.orderContent}</p>
+      <p>Order ID: {data.id}</p>
+      <p>Phone: {data.name}</p>
+      <p>Quantity: {data.quantity}</p>
+      <p>Title: {data.title}</p>
+      <p>Content: {data.orderContent}</p>
     </div>
 
   )

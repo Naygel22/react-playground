@@ -1,20 +1,29 @@
-import { useEffect, useState } from "react"
-import { Order, getAllOrders } from "../api/getAllOrders"
+import { getAllOrders } from "../api/getAllOrders"
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 export const Orders = () => {
-  const [orders, setOrders] = useState<Order[]>([])
 
-  useEffect(() => {
-    getAllOrders().then((data) => {
-      setOrders(data);
-    });
-  }, []);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["orders"],
+    queryFn: getAllOrders
+  })
+
+  if (!data) {
+    return <p>No data...</p>
+  }
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Error</p>
+  }
 
   return (
 
     <div>
-      {orders.map(order => (
+      {data.map(order => (
         <div key={order.id}>
           <h2>Current Form Values</h2>
           <p>Phone: {order.name}</p>
