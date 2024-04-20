@@ -39,7 +39,7 @@ export const ClientId = () => {
       <p>Town: {data.town}</p>
       <p>Sub Region: {data.subRegion}</p>
       <p>Phone Number: {data.phoneNumber}</p>
-      <Link to={`/clients/${params.id}/edit`}>Edit</Link>
+      <Link to={`/clients/${data.id}/edit`}>Edit</Link>
       <button onClick={handleDelete}>Delete</button>
     </div>
   )

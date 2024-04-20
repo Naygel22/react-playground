@@ -4,7 +4,7 @@
       "name": "Zbigniew",
       "surname": "Herbert",
       "street": "TestStreet",
-      "postCode": "00-125",
+      "postCode": "00-126",
       "town": "Town",
       "subRegion": "Region",
       "imgSrc": "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
@@ -57,18 +57,18 @@
       "orderContent": "content of an order3"
     },
     {
-      "id": "4f1a",
-      "name": "+48123456788",
-      "quantity": "7",
-      "title": "Title7",
-      "orderContent": "content of an order7"
+      "id": "b2fe",
+      "name": "+48 123 456 787",
+      "quantity": "14",
+      "title": "Title14",
+      "orderContent": "content of an order14"
     },
     {
-      "id": "5f6a",
+      "id": "0cb3",
       "name": "+48123456788",
-      "quantity": "5",
-      "title": "Title",
-      "orderContent": "content of an order"
+      "quantity": "13",
+      "title": "Title13",
+      "orderContent": "content of an order13"
     }
   ]
 }

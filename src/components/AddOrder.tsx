@@ -5,7 +5,7 @@ import { TextInput } from './forms/TextInput';
 import { sendOrderValues } from '../api/sendOrderValues';
 import { getAllClients } from '../api/getAllClients';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 type Option = {
   value: string;
@@ -16,6 +16,7 @@ export const AddOrder = () => {
   const navigate = useNavigate();
 
   const { data, isLoading, error } = useQuery({ queryKey: ["clients"], queryFn: getAllClients })
+  const queryClient = useQueryClient();
 
   const clients: Option[] = data
     ? data.map((client) => ({
@@ -23,6 +24,18 @@ export const AddOrder = () => {
       label: `${client.name} ${client.surname}`
     }))
     : [];
+
+  const mutation = useMutation({
+    mutationFn: async (values) => { return await sendOrderValues(values) },
+    onSuccess: () => {
+      // rewalidacja i pobranie ponownie zapytania pod kluczem orders
+      queryClient.invalidateQueries({ queryKey: ["orderId"] });
+    },
+    onError: () => {
+      console.log("Something went wrong")
+    }
+  });
+
 
   const formik = useFormik<OrderFormValues>({
     initialValues: {
@@ -32,7 +45,7 @@ export const AddOrder = () => {
       orderContent: ''
     },
     onSubmit: (values) => {
-      sendOrderValues(values);
+      mutation.mutate(values);
       navigate('/orders');
     },
     validationSchema: OrderSchema

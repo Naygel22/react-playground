@@ -28,6 +28,13 @@ export const EditClient = () => {
   if (!data) {
     return <p>No data...</p>
   }
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Error</p>
+  }
 
   useEffect(() => {
     //TODO: pobrać dane klienta z API
