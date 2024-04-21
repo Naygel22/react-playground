@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export const ClientId = () => {
   const params = useParams<{ id: string }>()
-  const { data, isLoading, error } = useQuery({ queryKey: ["clientId"], queryFn: () => getClientById(params.id) })
+  const { data, isLoading, error } = useQuery({ queryKey: ["clientId", params.id], queryFn: () => getClientById(params.id) })
   const navigate = useNavigate()
 
   const handleDelete = () => {

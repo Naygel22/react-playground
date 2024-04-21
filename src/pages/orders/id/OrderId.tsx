@@ -8,7 +8,7 @@ export const OrderId = () => {
   const params = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["orderId"],
+    queryKey: ["orderId", params.id],
     queryFn: () => getOrderById(params.id)
   })
 
