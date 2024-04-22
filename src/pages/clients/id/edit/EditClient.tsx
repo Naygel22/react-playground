@@ -18,7 +18,8 @@ export const EditClient = () => {
   const mutation = useMutation({
     mutationFn: async (values) => { return await updateClientById(values, params.id) },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clientId"] })
+      queryClient.invalidateQueries({ queryKey: ["clients"] }),
+        queryClient.invalidateQueries({ queryKey: ["clientId"] })
     },
     onError: () => {
       console.log("Something went wrong")

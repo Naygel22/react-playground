@@ -29,7 +29,7 @@ export const AddOrder = () => {
     mutationFn: async (values) => { return await sendOrderValues(values) },
     onSuccess: () => {
       // rewalidacja i pobranie ponownie zapytania pod kluczem orders
-      queryClient.invalidateQueries({ queryKey: ["orderId"] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: () => {
       console.log("Something went wrong")
