@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom"
 import { getOrderById } from "../../../api/getOrderById";
 import { Order } from "../../../api/getAllOrders";
 import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../../../api/constants";
 
 
 export const OrderId = () => {
   const params = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["orderId", params.id],
+    queryKey: [QUERY_KEYS.orders.get, params.id],
     queryFn: () => getOrderById(params.id)
   })
 

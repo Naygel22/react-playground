@@ -1,11 +1,13 @@
 import { getAllOrders } from "../api/getAllOrders"
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../api/constants";
+import { ROUTES } from "../routes";
 
 export const Orders = () => {
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["orders"],
+    queryKey: [QUERY_KEYS.orders.getAll],
     queryFn: getAllOrders
   })
 
@@ -30,7 +32,7 @@ export const Orders = () => {
           <p>Quantity: {order.quantity}</p>
           <p>Title: {order.title}</p>
           <p>Content: {order.orderContent}</p>
-          <Link to={`/orders/${order.id}`}>
+          <Link to={ROUTES.ordersId(order.id)}>
             <button>Details</button>
           </Link>
         </div>

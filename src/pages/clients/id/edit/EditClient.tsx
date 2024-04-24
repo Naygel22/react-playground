@@ -2,24 +2,26 @@ import { useState, useEffect } from 'react'
 import { ClientFormValues } from '../../../../validators/validators';
 import ClientForm from '../../../../components/ClientForm';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getClientById } from '../../../../api/getClientByID';
-import { updateClientById } from '../../../../api/updateClientById';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+import { useGetClientById } from '../../../../api/queries/clientQueries';
+import { useClientAddMutation } from '../../../../api/mutations/clientMutations';
+import { QUERY_KEYS } from '../../../../api/constants';
+import { ROUTES } from '../../../../routes';
 
 export const EditClient = () => {
   const params = useParams<{ id: string }>()
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState<ClientFormValues | null>(null)
 
-  const { data, isLoading, error } = useQuery({ queryKey: ["clientId", params.id], queryFn: () => getClientById(params.id) })
+  const { data, isLoading, error } = useGetClientById()
 
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: async (values) => { return await updateClientById(values, params.id) },
+  const mutation = useClientAddMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clients"] }),
-        queryClient.invalidateQueries({ queryKey: ["clientId"] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clients.getAll] }),
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clients.get] })
+      navigate(ROUTES.clientsId(params.id))
     },
     onError: () => {
       console.log("Something went wrong")
@@ -58,15 +60,13 @@ export const EditClient = () => {
 
   const onEditClient = (values: ClientFormValues) => {
     if (params.id && values) {
-      mutation.mutate(values)
-      navigate(`/clients/${params.id}`)
-
+      mutation.mutate({ updateClientData: values, id: params.id })
     }
   }
   return (
     <div>Edit client
       {initialValues ? <ClientForm initialFormValues={initialValues} onFormSubmit={onEditClient} /> : null}
-      <Link to={`/clients/${params.id}`}>Cancel</Link>
+      <Link to={ROUTES.clientsId(params.id)}>Cancel</Link>
 
     </div>
   )

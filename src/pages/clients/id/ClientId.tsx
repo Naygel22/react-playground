@@ -1,18 +1,18 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getClientById } from '../../../api/getClientByID';
 import { deleteClientById } from '../../../api/deleteClientById';
-import { useQuery } from '@tanstack/react-query';
+import { useGetClientById } from '../../../api/queries/clientQueries';
+import { ROUTES } from '../../../routes';
 
 
 export const ClientId = () => {
   const params = useParams<{ id: string }>()
-  const { data, isLoading, error } = useQuery({ queryKey: ["clientId", params.id], queryFn: () => getClientById(params.id) })
+  const { data, isLoading, error } = useGetClientById(params.id)
   const navigate = useNavigate()
 
   const handleDelete = () => {
     if (params.id) {
       deleteClientById(params.id).then(() => {
-        navigate("/clients")
+        navigate(ROUTES.clients)
       });
     }
   }
@@ -39,7 +39,7 @@ export const ClientId = () => {
       <p>Town: {data.town}</p>
       <p>Sub Region: {data.subRegion}</p>
       <p>Phone Number: {data.phoneNumber}</p>
-      <Link to={`/clients/${data.id}/edit`}>Edit</Link>
+      <Link to={ROUTES.clientsIdEdit(data)}>Edit</Link>
       <button onClick={handleDelete}>Delete</button>
     </div>
   )

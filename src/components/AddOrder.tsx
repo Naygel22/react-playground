@@ -6,6 +6,8 @@ import { sendOrderValues } from '../api/sendOrderValues';
 import { getAllClients } from '../api/getAllClients';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEYS } from '../api/constants';
+import { ROUTES } from '../routes';
 
 type Option = {
   value: string;
@@ -15,7 +17,7 @@ type Option = {
 export const AddOrder = () => {
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery({ queryKey: ["clients"], queryFn: getAllClients })
+  const { data, isLoading, error } = useQuery({ queryKey: [QUERY_KEYS.clients.getAll], queryFn: getAllClients })
   const queryClient = useQueryClient();
 
   const clients: Option[] = data
@@ -29,7 +31,7 @@ export const AddOrder = () => {
     mutationFn: async (values) => { return await sendOrderValues(values) },
     onSuccess: () => {
       // rewalidacja i pobranie ponownie zapytania pod kluczem orders
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.orders.getAll] });
     },
     onError: () => {
       console.log("Something went wrong")
@@ -46,7 +48,7 @@ export const AddOrder = () => {
     },
     onSubmit: (values) => {
       mutation.mutate(values);
-      navigate('/orders');
+      navigate(ROUTES.clients);
     },
     validationSchema: OrderSchema
   });

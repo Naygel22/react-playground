@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { SearchForm } from '../../components/Form';
 import { Card } from '../../components/First';
 import { Link } from 'react-router-dom';
-import { Client, getAllClients } from '../../api/getAllClients';
-import { useQuery } from '@tanstack/react-query';
+import { Client } from '../../api/getAllClients';
+import { useGetAllClients } from '../../api/queries/clientQueries';
+import { ROUTES } from '../../routes';
 
 export const Clients = () => {
   const [filteredCards, setFilteredCards] = useState<Client[]>([])
-  const { data, isLoading, error } = useQuery({ queryKey: ["clients"], queryFn: getAllClients })
+  const { data, isLoading, error } = useGetAllClients()
 
   useEffect(() => {
     if (data) {
@@ -37,7 +38,7 @@ export const Clients = () => {
       <SearchForm onSearch={onSearch} />
       {
 
-        filteredCards.map(el => <Link key={el.id} to={`/clients/${el.id}`}><Card  {...el} /></Link>)
+        filteredCards.map(el => <Link key={el.id} to={ROUTES.clientsId(el.id)}><Card  {...el} /></Link>)
       }
     </>
   )
