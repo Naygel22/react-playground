@@ -18,7 +18,7 @@ export const FakeLoginComponent = ({ initialLoginFormValues, onFormSubmit }: Log
   return (
     <form onSubmit={formik.handleSubmit}>
       <TextInput formik={formik} accessor='username' label='Username' />
-      <TextInput formik={formik} accessor='password' label='Password' />
+      <TextInput formik={formik} accessor='password' label='Password' type='password' />
       <button type="submit">Send</button>
     </form>
   )

@@ -1,10 +1,11 @@
 import TextField from '@mui/material/TextField';
 import { FormikProps } from 'formik';
 
-export const TextInput = <FormValues,>({ formik, accessor, label }: {
+export const TextInput = <FormValues,>({ formik, accessor, label, type = 'text' }: {
   formik: FormikProps<FormValues>,
   accessor: keyof FormValues & string
-  label: string
+  label: string,
+  type?: string
 }) => {
   return (
     <TextField
@@ -20,6 +21,7 @@ export const TextInput = <FormValues,>({ formik, accessor, label }: {
       onChange={formik.handleChange}
       onBlur={formik.handleBlur}
       value={formik.values[accessor]}
+      type={type}
     />
   );
 }

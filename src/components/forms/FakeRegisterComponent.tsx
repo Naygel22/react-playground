@@ -19,8 +19,8 @@ export const FakeRegisterComponent = ({ initialRegisterFormValues, onFormSubmit 
       <TextInput formik={formik} accessor='name' label='Name' />
       <TextInput formik={formik} accessor='username' label='Username' />
       <TextInput formik={formik} accessor='email' label='Email' />
-      <TextInput formik={formik} accessor='password' label='Password' />
-      <TextInput formik={formik} accessor='repeatPassword' label='Confirm password' />
+      <TextInput formik={formik} accessor='password' label='Password' type='password' />
+      <TextInput formik={formik} accessor='repeatPassword' label='Confirm password' type='password' />
       <button type="submit">Send</button>
     </form>
   )

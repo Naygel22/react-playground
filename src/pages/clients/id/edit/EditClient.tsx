@@ -13,7 +13,7 @@ export const EditClient = () => {
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState<ClientFormValues | null>(null)
 
-  const { data, isLoading, error } = useGetClientById()
+  const { data, isLoading, error } = useGetClientById(params.id)
 
   const queryClient = useQueryClient();
 

@@ -32,7 +32,7 @@ export const Orders = () => {
           <p>Quantity: {order.quantity}</p>
           <p>Title: {order.title}</p>
           <p>Content: {order.orderContent}</p>
-          <Link to={ROUTES.ordersId(order.id)}>
+          <Link to={ROUTES.ordersId(order)}>
             <button>Details</button>
           </Link>
         </div>

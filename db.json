@@ -35,9 +35,9 @@
     },
     {
       "id": "22b0",
-      "name": "piotr",
+      "name": "Piotr",
       "surname": "Kozłowski",
-      "street": "Street 1",
+      "street": "Street 2",
       "postCode": "15-204",
       "town": "Białystok",
       "subRegion": "Region",
@@ -87,6 +87,23 @@
       "quantity": "6",
       "title": "Title6",
       "orderContent": "content of an order6"
+    },
+    {
+      "id": "01db",
+      "name": "+48412356789",
+      "quantity": "7",
+      "title": "Title7",
+      "orderContent": "content of an order7"
+    }
+  ],
+  "registers": [
+    {
+      "id": "81cc",
+      "name": "Piotr",
+      "username": "piotr22",
+      "email": "pi0tr3k14@wp.pl",
+      "password": "Password123@",
+      "repeatPassword": "Password123@"
     }
   ]
 }

@@ -13,10 +13,8 @@ export const BASE_VALIDATORS = {
     .string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters long')
-    .matches(
-      /^(?=.*[A-Z])(?=.*[!@#$%^&*])$/,
-      'Password must contain at least one uppercase letter, one special character, and one digit'
-    )
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[!@#$%^&*()_+\-={}[\]:;"'<>,.?/]/, 'Password must contain at least one special character')
 }
 
 export const clientSchema = yup.object({
