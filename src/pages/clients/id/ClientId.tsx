@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { deleteClientById } from '../../../api/deleteClientById';
 import { useGetClientById } from '../../../api/queries/clientQueries';
 import { ROUTES } from '../../../routes';
+import ModalAlert from '../../../components/ModalAlert';
 
 
 export const ClientId = () => {
@@ -40,7 +41,7 @@ export const ClientId = () => {
       <p>Sub Region: {data.subRegion}</p>
       <p>Phone Number: {data.phoneNumber}</p>
       <Link to={ROUTES.clientsIdEdit(data)}>Edit</Link>
-      <button onClick={handleDelete}>Delete</button>
+      <ModalAlert buttonName='Delete' handleDelete={handleDelete} />
     </div>
   )
 }

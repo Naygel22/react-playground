@@ -1,19 +1,18 @@
-import { useState } from 'react';
 import './App.css'
 import { Browse } from './components/Browse';
-import { UserContext } from './contexts/UserContext';
+import { LoggedUser } from './components/LoggedUser';
+import { UserProvider } from './contexts/UserProvider';
 
 
 
 function App() {
-  const [isLogged, setIsLogged] = useState();
 
   return (
     <div>
-      <UserContext.Provider value={{ isLogged, setIsLogged }}>
-
+      <UserProvider>
         <Browse />
-      </UserContext.Provider>
+        <LoggedUser />
+      </UserProvider>
     </div>
   )
 }

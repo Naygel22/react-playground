@@ -6,5 +6,8 @@ export const QUERY_KEYS = {
   orders: {
     getAll: "orders",
     get: "orderId"
+  },
+  registers: {
+    getAll: "registers"
   }
 }
