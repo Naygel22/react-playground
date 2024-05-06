@@ -33,15 +33,20 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   function logIn(username: string, password: string) {
-    const userExists = data?.some((register) => {
-      return register.username === username && register.password === password;
+    const usernameExists = data?.some((register) => {
+      return register.username === username;
     });
 
-    if (userExists) {
-      setIsLogged(true);
-      setLoggedUser(userExists)
-      console.log("Login success!");
-      navigate(ROUTES.home)
+    if (usernameExists) {
+      const passwordExists = data?.some((register) => {
+        return register.password === password;
+      });
+      if (passwordExists) {
+        setIsLogged(true);
+        setLoggedUser(usernameExists)
+        console.log("Login success!");
+        navigate(ROUTES.home)
+      }
     } else {
       console.log("Login failed. User not found or invalid credentials.");
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -9,6 +9,7 @@ import {
   QueryCache
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import CircularLoading from './components/CircularLoading.tsx'
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
@@ -19,16 +20,22 @@ const queryClient = new QueryClient({
   }
 })
 
+const AppLazy = React.lazy(() => import('./App.tsx'));
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
+
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      {process.env.NODE_ENV === "development" && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </QueryClientProvider>
+    <Suspense fallback={<CircularLoading />}>
+      <QueryClientProvider client={queryClient}>
+        {process.env.NODE_ENV === "development" && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
+        <BrowserRouter>
+          <AppLazy />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </Suspense>
+
 
   </React.StrictMode>,
 )

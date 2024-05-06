@@ -9,6 +9,7 @@ import { AsideMenu } from './AsideMenu'
 import { AddOrderPage } from '../pages/orders/add/AddOrderPage'
 import { Orders } from './Orders'
 import { OrderId } from '../pages/orders/id/OrderId'
+import { ProtectedWrapper } from './ProtectedWrapper'
 
 export function Browse() {
   return (
@@ -29,7 +30,7 @@ export function Browse() {
           <Route path="add" element={<AddOrderPage />} />
         </Route>
 
-        <Route path="/invoices" element={<div>Invoices</div>} />
+        <Route path="/invoices" element={<ProtectedWrapper><div>Invoices</div></ProtectedWrapper>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route element={<div>404</div>} path="*" />
