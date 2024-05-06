@@ -7,11 +7,11 @@ export const LoggedUser = () => {
   return (
     <>
       {isLogged ? (
-        <>
-          <Avatar sx={{ bgcolor: "deepOrange[500]" }}>N</Avatar>
-          <div>{loggedUser?.username}</div>
-          <button onClick={logOut}>Log out</button>
-        </>
+        <div className="loggedUser">
+          <Avatar sx={{ bgcolor: "orange" }}>N</Avatar>
+          <div className="loggedUsername">{loggedUser?.username}</div>
+          <button className="logoutButton" onClick={logOut}>Log out</button>
+        </div>
       ) : (
         null
       )}

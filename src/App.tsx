@@ -12,8 +12,8 @@ function App() {
     <div>
       <ErrorBoundary>
         <UserProvider>
-          <Browse />
           <LoggedUser />
+          <Browse />
         </UserProvider>
       </ErrorBoundary>
 

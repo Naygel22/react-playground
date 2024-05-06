@@ -4,43 +4,52 @@
   box-sizing: border-box;
 }
 
-.card{
+.card {
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid 1px black;
   width: 400px;
 }
-.avatar{
+
+.avatar {
   width: 30%;
   height: auto;
   border-radius: 15%;
 }
+
 .info {
   text-align: left;
   margin-left: 50px;
 }
-.nameBar{
+
+.nameBar {
   display: flex;
   margin-bottom: 10px;
 }
-.name{
+
+.name {
   margin-right: 5px;
 }
-.street{
+
+.street {
   margin-right: 5px;
 }
-.adressBar{
+
+.adressBar {
   display: flex;
 }
+
 .phoneNumber {
   margin-top: 7px;
 }
-.wrapper{
+
+.wrapper {
   display: flex;
   gap: 10px;
 }
-.menu{
+
+.menu {
   border: 1px solid black;
   width: 200px;
   padding-left: 20px;
@@ -48,25 +57,52 @@
   padding-top: 20px;
   padding-right: 20px;
 }
-.menuBar, .logo {
+
+.menuBar,
+.logo {
   display: flex;
 }
+
 .logo {
   padding: 0;
 }
-.menuIcon{
+
+.menuIcon {
   margin-right: 10px;
 }
-.post{
+
+.post {
   border: 1px solid black;
   margin-top: 30px;
   padding: 10px;
   text-align: left;
 }
-.postTitle{
+
+.postTitle {
   font-size: 18px;
   margin-bottom: 5px;
 }
+
+.loggedUser {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: solid 1px black;
+  width: 300px;
+  height: 70px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+}
+
+.loggedUsername {
+  margin-left: 10px;
+}
+
+.logoutButton {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
 
 @media all and (max-width: 1050px) {
   .wrapper {

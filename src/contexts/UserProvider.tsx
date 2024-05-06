@@ -33,12 +33,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   function logIn(username: string, password: string) {
-    const usernameExists = data?.some((register) => {
+    const usernameExists = data?.find((register) => {
       return register.username === username;
     });
 
     if (usernameExists) {
-      const passwordExists = data?.some((register) => {
+      const passwordExists = data?.find((register) => {
         return register.password === password;
       });
       if (passwordExists) {
