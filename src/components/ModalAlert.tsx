@@ -6,10 +6,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 type ModalAlertProps = {
   buttonName: string,
-  handleDelete: () => void
+  onConfirm: () => void
 }
 
-export default function ModalAlert({ buttonName, handleDelete }: ModalAlertProps) {
+export default function ModalAlert({ buttonName, onConfirm }: ModalAlertProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -40,7 +40,7 @@ export default function ModalAlert({ buttonName, handleDelete }: ModalAlertProps
         </DialogTitle>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleDelete} autoFocus>
+          <Button onClick={onConfirm} autoFocus>
             Agree
           </Button>
         </DialogActions>

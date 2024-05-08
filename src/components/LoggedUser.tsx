@@ -8,7 +8,7 @@ export const LoggedUser = () => {
     <>
       {isLogged ? (
         <div className="loggedUser">
-          <Avatar sx={{ bgcolor: "orange" }}>N</Avatar>
+          <Avatar sx={{ bgcolor: "orange" }}>{loggedUser?.username.at(0)}</Avatar>
           <div className="loggedUsername">{loggedUser?.username}</div>
           <button className="logoutButton" onClick={logOut}>Log out</button>
         </div>

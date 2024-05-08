@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import { sendRegisterValues } from "../../api/sendRegisterValues"
 import { FakeRegisterComponent } from "../../components/forms/FakeRegisterComponent"
+import { RegisterFormValues } from "../../validators/validators"
 
-const initialRegisterFormValues = {
+const initialRegisterFormValues: RegisterFormValues = {
   name: '',
   username: '',
   email: '',
@@ -16,8 +17,10 @@ export const RegisterPage = () => {
     <FakeRegisterComponent
       initialRegisterFormValues={initialRegisterFormValues}
       onFormSubmit={(values) => {
-        sendRegisterValues(values).then(() => {
-          navigate("/login");
+        sendRegisterValues(values).then((res) => {
+          if (res) {
+            navigate("/login");
+          }
         })
       }}
     />
