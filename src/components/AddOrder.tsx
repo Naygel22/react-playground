@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../api/constants';
 import { ROUTES } from '../routes';
+import { useNotificationContext } from '../contexts/NotificationContext';
 
 type Option = {
   value: string;
@@ -16,6 +17,7 @@ type Option = {
 
 export const AddOrder = () => {
   const navigate = useNavigate();
+  const { notify } = useNotificationContext();
 
   const { data, isLoading, error } = useQuery({ queryKey: [QUERY_KEYS.clients.getAll], queryFn: getAllClients })
   const queryClient = useQueryClient();
@@ -48,7 +50,8 @@ export const AddOrder = () => {
     },
     onSubmit: (values) => {
       mutation.mutate(values);
-      navigate(ROUTES.clients);
+      navigate(ROUTES.orders);
+      notify("Order has been added", "success")
     },
     validationSchema: OrderSchema
   });

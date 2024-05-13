@@ -2,6 +2,7 @@ import { FakeLoginComponent } from '../../components/forms/FakeLoginComponent'
 import { useUserContext } from '../../contexts/UserContext';
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from '../../routes';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 const initialLoginFormValues = {
   username: '',
@@ -11,6 +12,7 @@ const initialLoginFormValues = {
 export const LoginPage = () => {
   const { logIn } = useUserContext();
   const navigate = useNavigate()
+  const { notify } = useNotificationContext();
 
   return (
     <FakeLoginComponent
@@ -20,6 +22,7 @@ export const LoginPage = () => {
         console.log('Login submitted with values:', values)
         if (isLoginSuccess) {
           navigate(ROUTES.home)
+          notify('You succesfully logged in', "success")
         }
       }}
     />

@@ -1,6 +1,7 @@
 
 import { sendClientValues } from '../../../api/sendClientValues';
 import ClientForm from '../../../components/ClientForm';
+import { useNotificationContext } from '../../../contexts/NotificationContext';
 import { ClientFormValues } from '../../../validators/validators';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,10 +18,12 @@ const addClientInital = {
 
 export const AddClient = () => {
   const navigate = useNavigate();
+  const { notify } = useNotificationContext()
 
   const onAddClient = (values: ClientFormValues) => {
     sendClientValues(values).then(() => {
       navigate("/clients");
+      notify("Client has been added", "success")
     })
   }
 
