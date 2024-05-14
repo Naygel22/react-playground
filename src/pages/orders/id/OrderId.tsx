@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import { getOrderById } from "../../../api/getOrderById";
-import { Order } from "../../../api/getAllOrders";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../api/constants";
 
@@ -35,5 +34,5 @@ export const OrderId = () => {
 
   )
 }
-
+export default OrderId
 

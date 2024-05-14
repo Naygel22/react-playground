@@ -1,18 +1,20 @@
-import { Route, Routes } from 'react-router-dom'
-import { AddClient } from '../pages/clients/add/AddClient'
-import { EditClient } from '../pages/clients/id/edit/EditClient'
-import { LoginPage } from '../pages/login/LoginPage'
-import { RegisterPage } from '../pages/register/RegisterPage'
-import { ClientId } from '../pages/clients/id/ClientId'
-import { AsideMenu } from './AsideMenu'
-import { AddOrderPage } from '../pages/orders/add/AddOrderPage'
-import { Orders } from './Orders'
-import { OrderId } from '../pages/orders/id/OrderId'
-import { ProtectedWrapper } from './ProtectedWrapper'
-import { lazy, Suspense } from 'react'
-import CircularLoading from './CircularLoading'
+import { Route, Routes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import CircularLoading from './CircularLoading';
+import { AsideMenu } from './AsideMenu';
+import { ProtectedWrapper } from './ProtectedWrapper';
+import { Step1 } from './forms/steps/Step1';
+import { MultiStepForm } from './forms/MultiStepForm';
 
 const Clients = lazy(() => import('../pages/clients/Clients'));
+const AddClient = lazy(() => import('../pages/clients/add/AddClient'));
+const ClientId = lazy(() => import('../pages/clients/id/ClientId'));
+const EditClient = lazy(() => import('../pages/clients/id/edit/EditClient'));
+const Orders = lazy(() => import('./Orders'));
+const OrderId = lazy(() => import('../pages/orders/id/OrderId'));
+const AddOrderPage = lazy(() => import('../pages/orders/add/AddOrderPage'));
+const RegisterPage = lazy(() => import('../pages/register/RegisterPage'));
+const LoginPage = lazy(() => import('../pages/login/LoginPage'));
 
 export function Browse() {
   return (
@@ -34,7 +36,11 @@ export function Browse() {
             <Route path="add" element={<AddOrderPage />} />
           </Route>
 
-          <Route path="/invoices" element={<ProtectedWrapper><div>Invoices</div></ProtectedWrapper>} />
+          <Route path="/invoices">
+            <Route index element={<ProtectedWrapper><div>Invoices</div></ProtectedWrapper>} />
+            <Route path="add" element={<MultiStepForm />} />
+          </Route>
+
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route element={<div>404</div>} path="*" />

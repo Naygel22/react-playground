@@ -59,5 +59,5 @@ export const ClientId = () => {
     </div>
   );
 };
-
+export default ClientId
 

@@ -7,6 +7,7 @@ import { useGetClientById } from '../../../../api/queries/clientQueries';
 import { useClientAddMutation } from '../../../../api/mutations/clientMutations';
 import { QUERY_KEYS } from '../../../../api/constants';
 import { ROUTES } from '../../../../routes';
+import { useNotificationContext } from '../../../../contexts/NotificationContext';
 
 export const EditClient = () => {
   const params = useParams<{ id: string }>()
@@ -17,11 +18,14 @@ export const EditClient = () => {
 
   const queryClient = useQueryClient();
 
+  const { notify } = useNotificationContext()
+
   const mutation = useClientAddMutation({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clients.getAll] }),
         queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clients.get] })
       navigate(ROUTES.clientsId(params.id))
+      notify("Client has been edited", "success")
     },
     onError: () => {
       console.log("Something went wrong")
@@ -71,3 +75,4 @@ export const EditClient = () => {
     </div>
   )
 }
+export default EditClient

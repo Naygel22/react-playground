@@ -36,3 +36,4 @@ export const AddClient = () => {
     </div>
   )
 }
+export default AddClient

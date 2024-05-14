@@ -5,3 +5,4 @@ export const AddOrderPage = () => {
     <AddOrder />
   )
 }
+export default AddOrderPage
