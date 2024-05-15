@@ -1,14 +1,19 @@
 import { useQuery } from "@tanstack/react-query"
 import { QUERY_KEYS } from "../../../api/constants"
-import { getAllOrders } from "../../../api/getAllOrders"
-import { useState } from "react"
+import { Order, getAllOrdersForPhoneNumber } from "../../../api/getAllOrders"
 
-export const Step2 = ({ currentClientPhone, onUpdatePickedOrders }) => {
-  const [pickedOrders, setPickedOrders] = useState([])
+type Step2Props = {
+  currentClientPhone: string
+  onUpdatePickedOrders: React.Dispatch<React.SetStateAction<Order[]>>
+  pickedOrders: Order[];
+}
+
+export const Step2 = ({ currentClientPhone, onUpdatePickedOrders, pickedOrders }: Step2Props) => {
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [QUERY_KEYS.orders.getAll],
-    queryFn: getAllOrders
+    queryKey: ["telNum", currentClientPhone],
+    queryFn: () => getAllOrdersForPhoneNumber(currentClientPhone),
+    enabled: !!currentClientPhone
   })
 
   if (!data) {
@@ -22,20 +27,18 @@ export const Step2 = ({ currentClientPhone, onUpdatePickedOrders }) => {
     return <p>Error</p>
   }
 
-  const selectedClientOrders = data.filter(
-    (order) => order.name === currentClientPhone
-  );
-  console.log(pickedOrders)
+  // const selectedClientOrders = data.filter(
+  //   (order) => order.name === currentClientPhone
+  // );
+  // console.log("data", data)
 
-  function handlePickOrders(order) {
-    const isPicked = pickedOrders.find(pickedOrder => pickedOrder === order)
-    if (isPicked) {
-      const deletePicked = pickedOrders.filter(pickedOrder => pickedOrder !== order)
-      setPickedOrders(deletePicked)
-      onUpdatePickedOrders(pickedOrders)
+  function handlePickOrders(order: Order) {
+    const isPreviouslyAdded = pickedOrders.some(pickedOrder => pickedOrder.id === order.id)
+    if (!isPreviouslyAdded) {
+      onUpdatePickedOrders(prev => [...prev, order])
     } else {
-      setPickedOrders([...pickedOrders, order])
-      onUpdatePickedOrders(pickedOrders)
+      const deduplicatedOrders = pickedOrders.filter(pickedOrder => pickedOrder.id !== order.id)
+      onUpdatePickedOrders(deduplicatedOrders)
     }
 
   }
@@ -43,9 +46,9 @@ export const Step2 = ({ currentClientPhone, onUpdatePickedOrders }) => {
   return (
 
     <div>
-      {selectedClientOrders.map(order => (
+      {data.map(order => (
         <div key={order.id}>
-          <h2>Current Form Values</h2>
+          <h2>Order {order.id}</h2>
           <p>Phone: {order.name}</p>
           <p>Quantity: {order.quantity}</p>
           <p>Title: {order.title}</p>

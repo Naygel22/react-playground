@@ -2,9 +2,11 @@ import * as yup from 'yup'
 import { Step1 } from "./steps/Step1";
 import { Step2 } from "./steps/Step2";
 import { Step3 } from "./steps/Step3";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Client } from '../../api/getAllClients';
+import { Order } from '../../api/getAllOrders';
 
-function getStepContent(step) {
+function getStepContent(step: number) {
   switch (step) {
     case 0:
       return <Step1 />;
@@ -19,23 +21,29 @@ function getStepContent(step) {
 }
 
 export const MultiStepForm = () => {
-  const [selectedClientPhone, setSelectedClientPhone] = useState('');
-  const [pickedOrders, setPickedOrders] = useState([]);
 
-  const validationSchema = [
-    //validation for step1
-    yup.object({
-      name: yup.string().required('Name is required'),
-    })
-  ];
+  // const [stepNumber,setStepNumber]=useState(0)
+
+  const [selectedClientPhone, setSelectedClientPhone] = useState('');
+  const [selectedClientData, setSelectedClientData] = useState<Client | undefined>(undefined)
+  const [pickedOrders, setPickedOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    setPickedOrders([])
+  }, [selectedClientData])
+
+
+
 
   return (
     <>
-      <Step1 setSelectedClientPhone={setSelectedClientPhone} />
+      <Step1 setSelectedClientPhone={setSelectedClientPhone} setSelectedClientData={setSelectedClientData} />
       <Step2
         currentClientPhone={selectedClientPhone}
         onUpdatePickedOrders={setPickedOrders}
+        pickedOrders={pickedOrders}
       />
+      <Step3 selectedClientData={selectedClientData} pickedOrders={pickedOrders} />
     </>
   )
 }

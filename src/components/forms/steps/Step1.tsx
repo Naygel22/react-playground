@@ -1,17 +1,20 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup'
 import { SelectInput } from '../SelectInput';
-import { useNavigate } from 'react-router-dom';
 import { useGetAllClients } from '../../../api/queries/clientQueries';
-import { useState } from 'react';
+import { Client } from '../../../api/getAllClients';
 
 type Option = {
   value: string;
   label: string;
 };
 
-export const Step1 = ({ setSelectedClientPhone }) => {
-  const navigate = useNavigate();
+type Step1Props = {
+  setSelectedClientPhone: React.Dispatch<React.SetStateAction<string>>
+  setSelectedClientData: React.Dispatch<React.SetStateAction<Client | undefined>>
+}
+
+export const Step1 = ({ setSelectedClientPhone, setSelectedClientData }: Step1Props) => {
 
   const { data, isLoading, error } = useGetAllClients()
 
@@ -22,21 +25,30 @@ export const Step1 = ({ setSelectedClientPhone }) => {
     }))
     : [];
 
+
+
+
   const formik = useFormik({
     initialValues: {
       name: ''
     },
-    onSubmit: (values) => {
-      console.log(values);
-      setSelectedClientPhone(values.name)
-      // navigate(ROUTES.orders);
-      // notify("Order has been added", "success")
-    },
+    onSubmit: (values) => onSubmitFormAction(values),
     validationSchema: yup.object({
       name: yup.string().required('Name is required'),
     })
 
   });
+
+  const selectedClient = data?.find(client => client.phoneNumber === formik.values.name);
+
+
+  const onSubmitFormAction = (values: {
+    name: string;
+  }) => {
+    console.log(values);
+    setSelectedClientPhone(values.name)
+    setSelectedClientData(selectedClient)
+  }
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -46,7 +58,6 @@ export const Step1 = ({ setSelectedClientPhone }) => {
     return <p>Error fetching clients: {error.message}</p>;
   }
 
-  const selectedClient = data?.find(client => client.phoneNumber === formik.values.name);
 
   return (
     <form onSubmit={formik.handleSubmit}>
