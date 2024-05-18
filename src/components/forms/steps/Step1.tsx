@@ -12,9 +12,10 @@ type Option = {
 type Step1Props = {
   setSelectedClientPhone: React.Dispatch<React.SetStateAction<string>>
   setSelectedClientData: React.Dispatch<React.SetStateAction<Client | undefined>>
+  setStepNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Step1 = ({ setSelectedClientPhone, setSelectedClientData }: Step1Props) => {
+export const Step1 = ({ setSelectedClientPhone, setSelectedClientData, setStepNumber }: Step1Props) => {
 
   const { data, isLoading, error } = useGetAllClients()
 
@@ -48,6 +49,7 @@ export const Step1 = ({ setSelectedClientPhone, setSelectedClientData }: Step1Pr
     console.log(values);
     setSelectedClientPhone(values.name)
     setSelectedClientData(selectedClient)
+    setStepNumber(1)
   }
 
   if (isLoading) {

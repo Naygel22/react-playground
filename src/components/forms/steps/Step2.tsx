@@ -5,10 +5,11 @@ import { Order, getAllOrdersForPhoneNumber } from "../../../api/getAllOrders"
 type Step2Props = {
   currentClientPhone: string
   onUpdatePickedOrders: React.Dispatch<React.SetStateAction<Order[]>>
-  pickedOrders: Order[];
+  pickedOrders: Order[]
+  setStepNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Step2 = ({ currentClientPhone, onUpdatePickedOrders, pickedOrders }: Step2Props) => {
+export const Step2 = ({ currentClientPhone, onUpdatePickedOrders, pickedOrders, setStepNumber }: Step2Props) => {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["telNum", currentClientPhone],
@@ -58,6 +59,7 @@ export const Step2 = ({ currentClientPhone, onUpdatePickedOrders, pickedOrders }
       ))
 
       }
+      <button onClick={() => setStepNumber(2)}>Next</button>
 
     </div>
   )

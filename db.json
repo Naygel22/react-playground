@@ -101,5 +101,25 @@
       "password": "Password123@",
       "repeatPassword": "Password123@"
     }
+  ],
+  "invoices": [
+    {
+      "id": "c4a0",
+      "price": "50",
+      "dateOfIssue": "18-05-2024",
+      "accountingMonth": "May"
+    },
+    {
+      "id": "6a4f",
+      "price": "20",
+      "dateOfIssue": "15-05-2024",
+      "accountingMonth": "May"
+    },
+    {
+      "id": "7089",
+      "price": "100",
+      "dateOfIssue": "10-04-2024",
+      "accountingMonth": "April"
+    }
   ]
 }

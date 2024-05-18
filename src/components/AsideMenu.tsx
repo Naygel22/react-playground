@@ -30,6 +30,11 @@ const menuData = [
     icon: <BsFillFileEarmarkRuledFill />,
   },
   {
+    linkName: "Invoices add",
+    link: "/invoices/add",
+    icon: <BsFillFileEarmarkRuledFill />,
+  },
+  {
     linkName: "Posts",
     link: "/posts",
     icon: <BsFillHddRackFill />,

@@ -3,7 +3,6 @@ import { Suspense, lazy } from 'react';
 import CircularLoading from './CircularLoading';
 import { AsideMenu } from './AsideMenu';
 import { ProtectedWrapper } from './ProtectedWrapper';
-import { Step1 } from './forms/steps/Step1';
 import { MultiStepForm } from './forms/MultiStepForm';
 
 const Clients = lazy(() => import('../pages/clients/Clients'));
@@ -13,6 +12,7 @@ const EditClient = lazy(() => import('../pages/clients/id/edit/EditClient'));
 const Orders = lazy(() => import('./Orders'));
 const OrderId = lazy(() => import('../pages/orders/id/OrderId'));
 const AddOrderPage = lazy(() => import('../pages/orders/add/AddOrderPage'));
+const Invoices = lazy(() => import('../pages/invoices/Invoices'))
 const RegisterPage = lazy(() => import('../pages/register/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/login/LoginPage'));
 
@@ -37,7 +37,7 @@ export function Browse() {
           </Route>
 
           <Route path="/invoices">
-            <Route index element={<ProtectedWrapper><div>Invoices</div></ProtectedWrapper>} />
+            <Route index element={<ProtectedWrapper><Invoices /></ProtectedWrapper>} />
             <Route path="add" element={<MultiStepForm />} />
           </Route>
 

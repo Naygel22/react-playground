@@ -77,3 +77,29 @@ export const OrderSchema = yup.object({
 })
 
 export type OrderFormValues = yup.InferType<typeof OrderSchema>
+
+
+const dateRegex = /^\d{2}-\d{2}-\d{4}$/; // DD-MM-YYYY
+
+const months = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+export const InvoiceSchema = yup.object({
+  price: yup
+    .number()
+    .required('Price is required')
+    .positive('Price must be a positive number')
+    .min(0.01, 'Price must be at least 0.01'),
+  dateOfIssue: yup
+    .string()
+    .required('Date of issue is required')
+    .matches(dateRegex, 'Date of issue must be in the format DD-MM-YYYY'),
+  accountingMonth: yup
+    .string()
+    .required('Accounting month is required')
+    .oneOf(months, 'Accounting month must be a valid month name')
+});
+
+export type InvoiceFormValues = yup.InferType<typeof InvoiceSchema>;

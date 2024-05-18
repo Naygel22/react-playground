@@ -10,5 +10,8 @@ export const QUERY_KEYS = {
   },
   registers: {
     getAll: "registers"
+  },
+  invoices: {
+    getAll: "invoices"
   }
 }
