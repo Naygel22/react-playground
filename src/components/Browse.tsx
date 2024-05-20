@@ -15,6 +15,7 @@ const AddOrderPage = lazy(() => import('../pages/orders/add/AddOrderPage'));
 const Invoices = lazy(() => import('../pages/invoices/Invoices'))
 const RegisterPage = lazy(() => import('../pages/register/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/login/LoginPage'));
+const MoneyForm = lazy(() => import('./forms/MoneyForm'));
 
 export function Browse() {
   return (
@@ -42,7 +43,11 @@ export function Browse() {
           </Route>
 
           <Route path="/register" element={<RegisterPage />} />
+
           <Route path="/login" element={<LoginPage />} />
+
+          <Route path='/money' element={<MoneyForm />} />
+
           <Route element={<div>404</div>} path="*" />
         </Routes>
       </Suspense>

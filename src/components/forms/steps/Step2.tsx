@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query"
-import { QUERY_KEYS } from "../../../api/constants"
 import { Order, getAllOrdersForPhoneNumber } from "../../../api/getAllOrders"
 
 type Step2Props = {

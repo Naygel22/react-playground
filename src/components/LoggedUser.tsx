@@ -1,8 +1,17 @@
 import { Avatar } from "@mui/material";
 import { useUserContext } from "../contexts/UserContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { useNavigate } from "react-router-dom";
 
 export const LoggedUser = () => {
   const { isLogged, loggedUser, logOut } = useUserContext();
+  const money = useSelector((state: RootState) => state.money.value)
+  const navigate = useNavigate()
+
+  const handleMoneyClick = () => {
+    navigate('/money');
+  };
 
   return (
     <>
@@ -10,6 +19,7 @@ export const LoggedUser = () => {
         <div className="loggedUser">
           <Avatar sx={{ bgcolor: "orange" }}>{loggedUser?.username.at(0)}</Avatar>
           <div className="loggedUsername">{loggedUser?.username}</div>
+          <div className="userMoney" onClick={handleMoneyClick}>Money: {money}</div>
           <button className="logoutButton" onClick={logOut}>Log out</button>
         </div>
       ) : (

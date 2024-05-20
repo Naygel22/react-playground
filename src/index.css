@@ -96,6 +96,7 @@
 
 .loggedUsername {
   margin-left: 10px;
+  margin-right: 20px;
 }
 
 .logoutButton {
@@ -103,6 +104,9 @@
   margin-right: 10px;
 }
 
+.userMoney {
+  cursor: pointer;
+}
 
 @media all and (max-width: 1050px) {
   .wrapper {
