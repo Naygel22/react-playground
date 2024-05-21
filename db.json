@@ -40,56 +40,40 @@
       "name": "+48123456789",
       "quantity": "3",
       "title": "Title",
-      "orderContent": "content of an order"
+      "orderContent": "content of an order",
+      "isPaid": false
     },
     {
       "id": "faa9",
       "name": "+48123456787",
       "quantity": "5",
       "title": "Title2",
-      "orderContent": "content of an order"
+      "orderContent": "content of an order",
+      "isPaid": false
     },
     {
       "id": "7d84",
       "name": "+48123456788",
       "quantity": "2",
       "title": "Title2",
-      "orderContent": "content of an order3"
+      "orderContent": "content of an order3",
+      "isPaid": false
     },
     {
       "id": "b2fe",
       "name": "+48123456787",
       "quantity": "14",
       "title": "Title14",
-      "orderContent": "content of an order14"
+      "orderContent": "content of an order14",
+      "isPaid": false
     },
     {
       "id": "0cb3",
       "name": "+48123456788",
       "quantity": "13",
       "title": "Title13",
-      "orderContent": "content of an order13"
-    },
-    {
-      "id": "a328",
-      "name": "+48123456788",
-      "quantity": "6",
-      "title": "Title6",
-      "orderContent": "content of an order6"
-    },
-    {
-      "id": "01db",
-      "name": "+48412356789",
-      "quantity": "7",
-      "title": "Title7",
-      "orderContent": "content of an order7"
-    },
-    {
-      "id": "18be",
-      "name": "+48123456789",
-      "quantity": "3",
-      "title": "Title3",
-      "orderContent": "content of an order3"
+      "orderContent": "content of an order13",
+      "isPaid": false
     }
   ],
   "registers": [

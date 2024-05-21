@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import moneyReducer from "./money/moneySlice"
+import orderReducer from "./orderSlice/orderSlice"
 
 export const store = configureStore({
   reducer: {
-    money: moneyReducer
+    money: moneyReducer,
+    order: orderReducer
   }
 })
 

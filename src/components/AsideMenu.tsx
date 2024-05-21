@@ -39,6 +39,11 @@ const menuData = [
     link: "/posts",
     icon: <BsFillHddRackFill />,
   },
+  {
+    linkName: "Cart",
+    link: "/cart",
+    icon: <BsFillHddRackFill />,
+  }
 ];
 
 export function AsideMenu() {

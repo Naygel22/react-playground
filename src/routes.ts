@@ -7,7 +7,7 @@ export const ROUTES = {
   clientsAdd: "/clients/add",
   clientsId: (id: string | undefined) => `/clients/${id}`,
   clientsIdEdit: (data: Client) => `/clients/${data.id}/edit`,
-  orders: "orders",
+  orders: "/orders",
   ordersId: (order: Order) => `/orders/${order.id}`,
   ordersAdd: '',
   invoices: "/invoices",
