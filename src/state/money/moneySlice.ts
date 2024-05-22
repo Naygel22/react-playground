@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import type { PayloadAction } from '@reduxjs/toolkit'
 interface MoneyState {
   value: number
 }
@@ -11,10 +11,10 @@ const moneySlice = createSlice({
   name: "money",
   initialState,
   reducers: {
-    deposit: (state, action) => {
+    deposit: (state, action: PayloadAction<number>) => {
       state.value += action.payload
     },
-    withdraw: (state, action) => {
+    withdraw: (state, action: PayloadAction<number>) => {
       if (state.value >= action.payload) {
         state.value -= action.payload
       } else {

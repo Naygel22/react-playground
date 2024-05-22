@@ -7,7 +7,7 @@ import { ROUTES } from "../routes";
 import ModalAlert from "./ModalAlert";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../state/orderSlice/orderSlice";
-import { RootState } from "../state/store";
+import { RootState, useAppSelector } from "../state/store";
 
 
 export const Orders = () => {
@@ -19,10 +19,10 @@ export const Orders = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const dispatch = useDispatch()
-  const selectedOrders = useSelector((state: RootState) => state.order.selectedOrders)
+  const selectedOrders = useAppSelector((state) => state.order.selectedOrders)
 
   const mutation = useMutation({
-    mutationFn: async (orderId) => {
+    mutationFn: async (orderId: string) => {
       return await deleteOrderById(orderId);
     },
     onSuccess: () => {
@@ -34,19 +34,19 @@ export const Orders = () => {
     }
   });
 
-  const handleDelete = (orderId) => {
+  const handleDelete = (orderId: string) => {
     mutation.mutate(orderId);
   };
 
-  const handleToggleOrder = (orderId: string) => {
+  const handleToggleOrder = (orderId: string, name: string) => {
     // Sprawdzamy, czy zamówienie jest już w koszyku
-    const isOrderInCart = selectedOrders.includes(orderId);
+    const isOrderInCart = selectedOrders.some(el => el.id === orderId);
 
     // Jeśli jest, usuwamy je z koszyka, w przeciwnym razie dodajemy do koszyka
     if (isOrderInCart) {
       dispatch(removeFromCart(orderId));
     } else {
-      dispatch(addToCart(orderId));
+      dispatch(addToCart({ id: orderId, name }));
     }
   };
 
@@ -74,7 +74,7 @@ export const Orders = () => {
             <button>Details</button>
           </Link>
           <ModalAlert buttonName='Delete' onConfirm={() => handleDelete(order.id)} />
-          <input type="checkbox" onChange={() => handleToggleOrder(order.id)} checked={selectedOrders.includes(order.id)} />
+          <input type="checkbox" onChange={() => handleToggleOrder(order.id, order.name)} checked={selectedOrders.some(el => el.id === order.id)} />
         </div>
       ))}
     </div>

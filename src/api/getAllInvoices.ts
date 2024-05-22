@@ -3,6 +3,7 @@ export type Invoice = {
   price: number
   dateOfIssue: string
   accountingMonth: string
+  paid: boolean
 }
 
 export const getAllInvoices = async () => {

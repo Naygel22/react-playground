@@ -1,15 +1,39 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../api/constants";
 import { getAllInvoices } from "../../api/getAllInvoices";
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import InvoicePDF from '../../components/InvoicePDF';
 import CircularLoading from "../../components/CircularLoading";
+import { UpdateInvoicePayload, updateInvoiceById } from "../../api/updateInvoiceById";
 
 export const Invoices = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEYS.invoices.getAll],
     queryFn: getAllInvoices
   });
+
+  const handlePay = (invoiceId: string) => {
+    mutation.mutate({
+      newPaidStatus: true,
+      invoiceId
+    })
+  }
+
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: async (data: UpdateInvoicePayload) => { return await updateInvoiceById({ newPaidStatus: data.newPaidStatus, invoiceId: data.invoiceId }) },
+    onSuccess: () => {
+
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.invoices.getAll] });
+    },
+    onError: () => {
+      console.log("Something went wrong");
+    }
+  });
+
+
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -39,6 +63,7 @@ export const Invoices = () => {
               loading ? <CircularLoading /> : <button>Download PDF</button>
             }
           </PDFDownloadLink>
+          {invoice.paid ? null : <button onClick={() => handlePay(invoice.id)}>Pay it!</button>}
         </div>
       ))}
     </div>

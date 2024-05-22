@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Order } from "../../api/getAllOrders";
+
+type SelectedOrder = Pick<Order, "id" | "name">
 
 interface OrderState {
-  selectedOrders: string[]; // Przechowuje ID wybranych zamówień
+  selectedOrders: SelectedOrder[]; // Przechowuje ID wybranych zamówień
 }
 
 const initialState: OrderState = {
@@ -12,11 +15,11 @@ const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<string>) => {
+    addToCart: (state, action: PayloadAction<SelectedOrder>) => {
       state.selectedOrders.push(action.payload);
     },
-    removeFromCart: (state, action: PayloadAction<string>) => {
-      state.selectedOrders = state.selectedOrders.filter(orderId => orderId !== action.payload);
+    removeFromCart: (state, action: PayloadAction<SelectedOrder["id"]>) => {
+      state.selectedOrders = state.selectedOrders.filter(order => order.id !== action.payload);
     }
   }
 });

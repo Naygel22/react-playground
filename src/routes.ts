@@ -1,14 +1,11 @@
-import { Client } from "./api/getAllClients";
-import { Order } from "./api/getAllOrders";
-
 export const ROUTES = {
   home: "/",
   clients: "/clients",
   clientsAdd: "/clients/add",
   clientsId: (id: string | undefined) => `/clients/${id}`,
-  clientsIdEdit: (data: Client) => `/clients/${data.id}/edit`,
+  clientsIdEdit: (clientId: string) => `/clients/${clientId}/edit`,
   orders: "/orders",
-  ordersId: (order: Order) => `/orders/${order.id}`,
+  ordersId: (orderId: string) => `/orders/${orderId}`,
   ordersAdd: '',
   invoices: "/invoices",
   register: "/register",

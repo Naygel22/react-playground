@@ -1,12 +1,11 @@
 import { Avatar } from "@mui/material";
 import { useUserContext } from "../contexts/UserContext";
-import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../state/store";
 
 export const LoggedUser = () => {
   const { isLogged, loggedUser, logOut } = useUserContext();
-  const money = useSelector((state: RootState) => state.money.value)
+  const money = useAppSelector((state) => state.money.value)
   const navigate = useNavigate()
 
   const handleMoneyClick = () => {

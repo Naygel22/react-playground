@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
+import { RootState, useAppSelector } from "../state/store";
 import { ROUTES } from "../routes";
 
 const Cart = () => {
-  const selectedOrders = useSelector((state: RootState) => state.order.selectedOrders);
+  const selectedOrders = useAppSelector((state: RootState) => state.order.selectedOrders);
 
   return (
     <div>
@@ -13,10 +13,12 @@ const Cart = () => {
         <p>Your cart is empty</p>
       ) : (
         <ul>
-          {selectedOrders.map((orderId) => (
-            <li key={orderId}>
-              <Link to={ROUTES.ordersId(orderId)}>Order Details</Link>
-            </li>
+          {selectedOrders.map((order) => (
+            <Link to={ROUTES.ordersId(order.id)} key={order.id}>
+              <div >
+                {order.name}
+              </div>
+            </Link>
           ))}
         </ul>
       )}
