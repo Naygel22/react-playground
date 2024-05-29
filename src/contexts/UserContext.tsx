@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, createContext, useContext } from "react";
 import { useState } from "react";
 import { User, getAllRegisters } from "../api/getAllRegisters";
+import supabase from "../../types/supabaseClient";
 
 type UserContextProps = {
   isLogged: boolean,
@@ -27,17 +28,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
 
   async function logIn(username: string, password: string) {
-    const usernameExists = await getUserByUsername(username);
-
-    if (usernameExists && usernameExists.password === password) {
-      setIsLogged(true);
-      setLoggedUser(usernameExists)
-      console.log("Login success!");
-      return true;
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: username,
+      password: password
+    })
+    if (data) {
+      setIsLogged(true)
+      return;
     }
-    return false;
-    // console.log("Login failed. User not found or invalid credentials.");
-
+    if (error) {
+      setIsLogged(false)
+    }
   }
 
   function logOut() {

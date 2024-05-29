@@ -1,20 +1,26 @@
-import { getUserByUsername } from "../contexts/UserContext";
+import supabase from "../../types/supabaseClient";
 import { RegisterFormValues } from "../validators/validators";
 
 export const sendRegisterValues = async (newRegister: RegisterFormValues) => {
 
-  const userExist = await getUserByUsername(newRegister.username)
-  if (userExist) {
+  const { data, error } = await supabase.auth.signUp({
+    email: newRegister.email,
+    password: newRegister.password
+  })
+  if (error) {
     return false;
   }
-  const response = await fetch(`http://localhost:3000/registers`, {
-    method: "POST",
-    headers: { "Content-type": "application/json;charset=UTF-8" },
-    body: JSON.stringify(newRegister),
-  });
-  if (!response.ok) {
-    return {};
+  if (data) {
+    const { error: error1 } = await supabase
+      .from('users')
+      .insert([
+        { id: data.user?.id, name: newRegister.name, username: newRegister.username, avatar: "" },
+      ])
+      .select()
+    if (error1) {
+      return false;
+    }
   }
-  const data = await response.json();
-  return data;
+  return true
 }
+

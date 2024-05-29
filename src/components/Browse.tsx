@@ -4,6 +4,7 @@ import CircularLoading from './CircularLoading';
 import { AsideMenu } from './AsideMenu';
 import { ProtectedWrapper } from './ProtectedWrapper';
 import { MultiStepForm } from './forms/MultiStepForm';
+import { UserData } from '../pages/userData/UserData';
 
 const Clients = lazy(() => import('../pages/clients/Clients'));
 const AddClient = lazy(() => import('../pages/clients/add/AddClient'));
@@ -50,6 +51,8 @@ export function Browse() {
           <Route path='/money' element={<MoneyForm />} />
 
           <Route path='/cart' element={<Cart />} />
+
+          <Route path='/me' element={<UserData />} />
 
           <Route element={<div>404</div>} path="*" />
         </Routes>

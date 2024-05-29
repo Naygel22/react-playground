@@ -6,6 +6,7 @@ import { NotificationProvider } from './contexts/NotificationContext';
 import { UserProvider } from './contexts/UserContext';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
+import supabase from '../types/supabaseClient'
 
 function App() {
 
